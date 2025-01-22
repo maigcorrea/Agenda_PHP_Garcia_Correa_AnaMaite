@@ -25,6 +25,13 @@
                         set_cookie("usuario",$_POST["nom"]);
                     }
 
+                    //Se abre una sesión. PREGUNTA: Se tendría que iniciar una sesión por cada tipo de  usuario? No, no?
+                    require_once("../Modelo/cookies_sesiones.php");
+                    set_session("usu",$_POST["nom"]);
+
+                    //Se guarda el nombre del usuario, que está en la sesión
+                    $nUsu=$_SESSION["usu"];
+
                     //Se redirige al dashboard en función del tipo de usuario
                     if($tipo=="usuario"){
                         require_once("../Vista/cabecera.html");
@@ -60,8 +67,21 @@
 
         $action();
     }else{
-        //Se comprueban sesiones
+        //Se comprueba si existe ya una sesión
+        require_once("../Modelo/cookies_sesiones.php");
+        if(is_session("usu")){
+            //Si la sesión ya está abierta, se guarda el nombre del usuario, que está en la sesión
+            $nUsu=get_session("usu");
 
-        header("Location: ../Vista/login.php");
+            //Se redirige al menú de amigos
+            require_once("../Vista/cabecera.html");
+            require_once("../Vista/menu_amigos.php");
+            require_once("../Vista/pie.html");
+        }else{
+            //Si no hay sesión, se redirige al login
+            header("Location: ../Vista/login.php");
+        }
+
+
     }
 ?>
