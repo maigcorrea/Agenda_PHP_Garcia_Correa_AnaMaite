@@ -1,11 +1,11 @@
 <?php
-     require_once("../../../../../cred.php");
+     require_once("../../../cred.php");
 
      class bd{
         private $conn;
 
         public function __construct(){
-            $this->conn=new mysqli("localhost",USU_CONN,PSW_CONN,"escuela");
+            $this->conn=new mysqli("localhost",USU_CONN,PSW_CONN,"agenda");
         } 
 
         public function getConection(){
