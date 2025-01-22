@@ -5,7 +5,12 @@
         
             require_once("../Modelo/class_user.php");
             $usuario=new Usuario();
-            // $mensaje;
+            
+            //Si al mandar el form, la casilla de recordar está marcada, y ya existe una cookie anterior, se borra la cookie anterior. Esto se hace por si inicia sesión otra persona, para que no se quede con la cookie del aterior usuario y su cookie nueva se genere.
+            if(isset($_POST["rec"])){
+                require_once("../Modelo/cookies_sesiones.php");
+                unset_cookie("usuario");
+            }
 
             //Comprobar si el usuario está en la bd
             if($usuario->comprobarNombre($_POST["nom"])){
@@ -16,7 +21,7 @@
                     
                     //Si ha marcado la casilla de "Recordar" se genera la cookie
                     if(isset($_POST["rec"])){
-                        require_once("../Modelo/cookies_sesiones.php");
+                        require_once("../Modelo/cookies_sesiones.php"); //Está bien poner el require_once 2 veces?
                         set_cookie("usuario",$_POST["nom"]);
                     }
 

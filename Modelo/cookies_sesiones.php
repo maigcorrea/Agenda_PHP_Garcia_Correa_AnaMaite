@@ -1,13 +1,11 @@
 <?php
 
-require_once("./class_bd");
-
     //Generar una cookie
     function set_cookie(String $nom, $val){
         setcookie($nom,$val,time()+(86400*30));
     }
 
-    
+
     //Eliminar una cookie
     function unset_cookie(String $nom){
         $comp=false;
