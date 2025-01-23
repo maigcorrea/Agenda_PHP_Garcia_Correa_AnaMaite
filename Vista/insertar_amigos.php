@@ -1,7 +1,7 @@
 <body>
     <h1>Nuevo Amigo</h1>
 
-    <form action="">
+    <form action="../Controlador/index_usuarios.php" method="POST">
         <label for="nombre">Nombre</label><br>
         <input type="text" name="nombre"><br>
         <label for="ape">Apellidos</label><br>
@@ -9,6 +9,9 @@
         <label for="nac">Fecha Nacimiento</label><br>
         <input type="date" name="nac"><br>
 
-        <input type="submit" value="insertar" name="action">
+        <input type="submit" value="Enviar" name="action">
     </form>
+    <?php
+        if(isset($mensaje)) echo "<p>$mensaje</p>";
+    ?>
 </body>

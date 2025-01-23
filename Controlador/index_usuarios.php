@@ -19,16 +19,18 @@
                 if($usuario->comprobarContr($_POST["nom"],$_POST["contr"])){
                     //Sacar el tipo de usuario
                     $tipo=$usuario->comprobarTipo($_POST["nom"],$_POST["contr"]);
+                    //Sacar el id del usuario
+                    $id=$usuario->get_id($_POST["nom"],$_POST["contr"]);
                     
-                    //Si ha marcado la casilla de "Recordar" se genera la cookie
+                    //Si ha marcado la casilla de "Recordar" se generan la cookie con el nombre del usuario
                     if(isset($_POST["rec"])){
                         require_once("../Modelo/cookies_sesiones.php"); //Está bien poner el require_once 2 veces?
                         set_cookie("usuario",$_POST["nom"]);
                     }
 
-                    //Se abre una sesión. PREGUNTA: Se tendría que iniciar una sesión por cada tipo de  usuario? No, no?
+                    //Se abren dos sesiones, una guarda el nombre del usuario y otra el id.
                     require_once("../Modelo/cookies_sesiones.php");
-                    set_session("usu",$_POST["nom"]);
+                    set_session("usu",$_POST["nom"],"id",$id);
 
                     //Se guarda el nombre del usuario, que está en la sesión
                     $nUsu=$_SESSION["usu"];
@@ -44,25 +46,35 @@
                         require_once("../Vista/cabecera.html");
                         require_once("../Vista/menu_amigos.php");
                         require_once("../Vista/pie.html");
+                        // irVistaAmigos(); POR QUÉ SI LA FUNCIÓN TIENE LO MISMO, NO FUNCIONA??
                     }
                 }else{
                     //Si la contraseña no es correcta mostrar mensaje
                     $mensaje="<p>La contraseña no es correcta</p>";
 
-                    require_once("../Vista/cabecera.html");
-                    require_once("../Vista/login.php");
-                    require_once("../Vista/pie.html");
+                    // require_once("../Vista/cabecera.html");
+                    // require_once("../Vista/login.php");
+                    // require_once("../Vista/pie.html");
+                    iniSesion();
                 }
             }else{
                 //Mensaje de que el usuario no está en la bd
                 $mensaje="<p>El usuario no se encuentra registrado</p>";
-                require_once("../Vista/cabecera.html");
-                require_once("../Vista/login.php");
-                require_once("../Vista/pie.html");
+                // require_once("../Vista/cabecera.html");
+                // require_once("../Vista/login.php");
+                // require_once("../Vista/pie.html");
+                iniSesion();
             }
 
             
 
+    }
+
+    //Función para redirigir a la vista de amigos
+    function irVistaAmigos(){
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/menu_amigos.php");
+        require_once("../Vista/pie.html");
     }
 
     //Función para redirigir al login 
@@ -88,24 +100,31 @@
         require_once("../Vista/pie.html");
     }
 
-    // function insertar(){
-    //     require_once("../Modelo/class_amigo.php");
-    //     $amigo=new Amigo();
-    //     if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],Aqui iria el id o nombre del usuario)){
-    //         //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
-    //         echo "Bien";
-    //     }else{
-    //         //Si no se ha insertado correctamente mostrar un mensaje
-    //         echo "Mal";
-    //     }
-    // }
+    function insertar(){
+        //Se necesita start_session para abrir una sesión y poder utilizar el valor de la sesión id como parámetro
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
+            //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
+            //Falta mostrar el mensaje
+            iniSesion();
+        }else{
+            //Si no se ha insertado correctamente mostrar un mensaje
+            $mensaje="Error. No se ha podido realizar la inserción";
+            vistaInsertAmigos();
+        }
+    }
 
 
 
     if(isset($_REQUEST["action"])){
-        $action=$_REQUEST["action"];
+        $action=strtolower($_REQUEST["action"]);
 
-        if($action=="Insertar amigos") $action="vistaInsertAmigos";
+        if($action=="insertar amigos") $action="vistaInsertAmigos";
+        if($action=="enviar") $action="insertar";
 
         $action();
     }else{

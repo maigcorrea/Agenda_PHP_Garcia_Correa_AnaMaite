@@ -15,6 +15,20 @@
             $this->contrasenia="";
         }
 
+        public function get_id($nom,$contra){
+            //Sacar el id del usuario
+            $sentencia="SELECT id FROM usuario WHERE nombre=? AND contrasenia=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("ss",$nom,$contra);
+            $consulta->bind_result($id);
+
+            $consulta->execute();
+            $consulta->fetch();
+
+            $consulta->close();
+            return $id;
+        }
+
 
         public function comprobarTipo($nom,$contra){
             //Comprobar si el usuario es administrador

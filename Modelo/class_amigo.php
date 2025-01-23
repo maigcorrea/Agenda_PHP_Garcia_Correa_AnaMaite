@@ -45,10 +45,9 @@
             $consulta->bind_param("sssi",$nom,$ape,$f_nac,$usuario);
             
             $consulta->execute();
-            $consulta->fetch();
 
             $insertado=false;
-            if($consulta->rowCount()==1){
+            if($consulta->affected_rows==1){
                 $insertado=true;
             }
 
