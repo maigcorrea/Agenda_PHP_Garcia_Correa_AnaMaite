@@ -51,18 +51,11 @@
                 }else{
                     //Si la contraseña no es correcta mostrar mensaje
                     $mensaje="<p>La contraseña no es correcta</p>";
-
-                    // require_once("../Vista/cabecera.html");
-                    // require_once("../Vista/login.php");
-                    // require_once("../Vista/pie.html");
                     iniSesion();
                 }
             }else{
                 //Mensaje de que el usuario no está en la bd
                 $mensaje="<p>El usuario no se encuentra registrado</p>";
-                // require_once("../Vista/cabecera.html");
-                // require_once("../Vista/login.php");
-                // require_once("../Vista/pie.html");
                 iniSesion();
             }
 
