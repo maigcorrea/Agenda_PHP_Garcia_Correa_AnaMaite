@@ -1,5 +1,6 @@
 <?php
 
+    //USUARIOS
     //Iniciar Sesión
     function iniciar(){
         
@@ -34,6 +35,12 @@
 
                     //Se redirige al dashboard en función del tipo de usuario
                     if($tipo=="usuario"){
+                        //Mostrar amigos antes de redirigir
+                        require_once("../Modelo/class_amigo.php");
+                        $amigo=new Amigo();
+                        $datosAmigo=$amigo->get_Amigos($nUsu);
+
+
                         require_once("../Vista/cabecera.html");
                         require_once("../Vista/menu_amigos.php");
                         require_once("../Vista/pie.html");
@@ -74,11 +81,31 @@
     }
 
 
+    //AMIGOS
+    function vistaInsertAmigos(){
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/insertar_amigos.php");
+        require_once("../Vista/pie.html");
+    }
+
+    // function insertar(){
+    //     require_once("../Modelo/class_amigo.php");
+    //     $amigo=new Amigo();
+    //     if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],Aqui iria el id o nombre del usuario)){
+    //         //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
+    //         echo "Bien";
+    //     }else{
+    //         //Si no se ha insertado correctamente mostrar un mensaje
+    //         echo "Mal";
+    //     }
+    // }
 
 
 
     if(isset($_REQUEST["action"])){
         $action=$_REQUEST["action"];
+
+        if($action=="Insertar amigos") $action="vistaInsertAmigos";
 
         $action();
     }else{
