@@ -58,6 +58,21 @@
 
     }
 
+    //Función para redirigir al login 
+    function iniSesion(){
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/login.php");
+        require_once("../Vista/pie.html");
+    }
+
+
+    function salir(){
+        require_once("../Modelo/cookies_sesiones.php");
+        unset_session();
+
+        iniSesion();
+    }
+
 
 
 
@@ -79,7 +94,7 @@
             require_once("../Vista/pie.html");
         }else{
             //Si no hay sesión, se redirige al login
-            header("Location: ../Vista/login.php");
+            iniSesion();
         }
 
 
