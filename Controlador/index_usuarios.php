@@ -130,10 +130,14 @@
     function insertarJuego(){
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
-        $datosJuegos=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$_POST["img"]); //Aquí van los datos del formulario
+        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$_POST["img"]); //Aquí van los datos del formulario
 
         //Si se inserta, redireccionar a la vista de juegos
-
+        if($insertado){
+            //Vista de juegos y mensaje de que se ha insertado correctamente
+        }else{
+            //Misma vista y mensaje de error
+        }
     }
 
 
