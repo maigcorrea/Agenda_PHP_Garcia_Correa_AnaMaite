@@ -72,7 +72,7 @@
 
     //Función para redirigir al login 
     function iniSesion(){
-        require_once("../Vista/cabecera.html");
+        // require_once("../Vista/cabecera.html");
         require_once("../Vista/login.php");
         require_once("../Vista/pie.html");
     }
@@ -111,6 +111,20 @@
         }
     }
 
+
+    //JUEGOS
+    function juegos(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        require_once("../Modelo/class_juego.php");
+        $juego=new Juego();
+        $datosJuegos=$juego->get_juegos($_SESSION["id"]);
+
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/juegos.php");
+        require_once("../Vista/pie.html");
+    }
 
 
     if(isset($_REQUEST["action"])){

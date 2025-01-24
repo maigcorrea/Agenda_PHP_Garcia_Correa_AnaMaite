@@ -3,9 +3,9 @@
     <p>Bienvenid@ <?php if(isset($nUsu)) echo $nUsu?></p>
 
     <!-- Cerrar sesión -->
-     <form action="../Controlador/index_usuarios.php">
+     <!-- <form action="../Controlador/index_usuarios.php">
         <input type="submit" value="salir" name="action">
-     </form>
+     </form> -->
 
      <form action="../Controlador/index_usuarios.php">
         <input type="submit" value="Insertar amigos" name="action">
