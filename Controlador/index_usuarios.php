@@ -128,21 +128,25 @@
 
 
     function insertarJuego(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
-        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$_POST["img"]); //Aquí van los datos del formulario
+        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$_POST["img"],$_SESSION["id"]); //Aquí van los datos del formulario
 
         //Si se inserta, redireccionar a la vista de juegos
         if($insertado){
+            echo "Insertado";
             //Vista de juegos y mensaje de que se ha insertado correctamente
             //Crear carpeta con el nombre del usuario y meter la imagen, luego coger esa ruta para meterla en la bd
         }else{
+            echo "Mal";
             //Misma vista y mensaje de error
         }
     }
 
 
-    function vistainsertarjuego(){
+    function vistaInsertarJuego(){
         require_once("../Vista/cabecera.html");
         require_once("../Vista/insertar_juego.php");
         require_once("../Vista/pie.html");
@@ -152,9 +156,11 @@
     if(isset($_REQUEST["action"])){
         $action=strtolower($_REQUEST["action"]);
 
+        //Estos if sirven para que en función del value del input submit, se llame a la función correspondiente si esta tiene otro nombre diferente
         if($action=="insertar amigos") $action="vistaInsertAmigos";
         if($action=="enviar") $action="insertar";
-        if($action=="insertar juego") $action="vistainsertarjuego";
+        if($action=="insertar juego") $action="vistaInsertarJuego";
+        if($action=="añadir juego") $action="insertarJuego";
 
         $action();
     }else{

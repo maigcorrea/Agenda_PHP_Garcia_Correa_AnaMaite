@@ -37,10 +37,10 @@
             return $juegos;
         }
 
-        public function insertar_Juego($titulo,$plataforma,$lanzamiento,$img){
-            $sentencia="INSERT INTO juego VALUES(?,?,?,?)";
+        public function insertar_Juego($titulo,$plataforma,$lanzamiento,$img,$usuario){
+            $sentencia="INSERT INTO juego (titulo,plataforma,lanzamiento,img,usuario) VALUES(?,?,?,?,?)";
             $consulta=$this->conn->getConection()->prepare($sentencia);
-            $consulta->bind_param("ssis",$titulo,$plataforma,$lanzamiento,$img);
+            $consulta->bind_param("ssisi",$titulo,$plataforma,$lanzamiento,$img,$usuario);
             $consulta->execute();
 
             $exito=false;

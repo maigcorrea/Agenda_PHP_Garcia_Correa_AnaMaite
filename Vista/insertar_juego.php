@@ -1,4 +1,4 @@
-<form action="../Controlador/index_usuarios.php" method="post">
+<form action="../Controlador/index_usuarios.php" method="POST" enctype="multipart/form-data">
     <label for="tit">Titulo</label><br>
     <input type="text" name="tit"><br>
     <label for="plat">Plataforma</label><br>
@@ -8,7 +8,7 @@
     <label for="img">Imagen:</label><br>
     <input type="file" name="img"><br>
 
-    <input type="submit" value="Insertar juego" name="action">
+    <input type="submit" value="Añadir juego" name="action">
 
 </form>
 <?php
