@@ -132,7 +132,7 @@
         start_session();
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
-        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$_POST["img"],$_SESSION["id"]); //Aquí van los datos del formulario
+        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],"url de imagen",$_SESSION["id"]); //Aquí van los datos del formulario
 
         //Si se inserta, redireccionar a la vista de juegos
         if($insertado){
