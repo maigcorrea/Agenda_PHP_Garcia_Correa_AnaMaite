@@ -7,7 +7,7 @@
         <input type="submit" value="salir" name="action">
      </form> -->
 
-     <form action="../Controlador/index_usuarios.php">
+     <form action="../Controlador/index_usuarios.php" method="POST">
         <input type="submit" value="Insertar amigos" name="action">
         <input type="submit" value="Buscar amigos" name="action">
      </form>

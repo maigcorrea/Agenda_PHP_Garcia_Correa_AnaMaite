@@ -36,5 +36,21 @@
             $consulta->close();
             return $juegos;
         }
+
+        public function insertar_Juego($titulo,$plataforma,$lanzamiento,$img){
+            $sentencia="INSERT INTO juego VALUES(?,?,?,?)";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("ssis",$titulo,$plataforma,$lanzamiento,$img);
+            $consulta->execute();
+
+            $exito=false;
+            if($consulta->affected_rows==1){
+                $exito=true;
+            }
+
+            $consulta->close();
+            return $exito;
+        }
+
     }
 ?>

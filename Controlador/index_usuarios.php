@@ -127,11 +127,29 @@
     }
 
 
+    function insertarJuego(){
+        require_once("../Modelo/class_juego.php");
+        $juego=new Juego();
+        $datosJuegos=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$_POST["img"]); //Aquí van los datos del formulario
+
+        //Si se inserta, redireccionar a la vista de juegos
+
+    }
+
+
+    function vistainsertarjuego(){
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/insertar_juego.php");
+        require_once("../Vista/pie.html");
+    }
+
+
     if(isset($_REQUEST["action"])){
         $action=strtolower($_REQUEST["action"]);
 
         if($action=="insertar amigos") $action="vistaInsertAmigos";
         if($action=="enviar") $action="insertar";
+        if($action=="insertar juego") $action="vistainsertarjuego";
 
         $action();
     }else{

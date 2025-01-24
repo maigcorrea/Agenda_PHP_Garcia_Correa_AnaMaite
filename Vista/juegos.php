@@ -1,3 +1,8 @@
+<form action="../Controlador/index_usuarios.php" method="post">
+    <input type="submit" value="Insertar juego" name="action">
+    <input type="submit" value="Buscar juego" name="action">
+</form>
+
 <table>
          <tr><th>JUEGO</th><th>TITULO</th><th>PLATAFORMA</th><th>FECHA DE LANZAMIENTO</th><th> </th></tr>
          <?php
