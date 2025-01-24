@@ -1,6 +1,6 @@
 <body>
     <h1>MENÚ AMIGOS</h1>
-    <p>Bienvenid@ <?php if(isset($nUsu)) echo $nUsu?></p>
+    <p>Bienvenid@ <?php if(isset($_SESSION["usu"])) echo $_SESSION["usu"]?></p>
 
     <!-- Cerrar sesión -->
      <!-- <form action="../Controlador/index_usuarios.php">
@@ -17,7 +17,7 @@
          <?php
             if(isset($datosAmigo)){
                foreach ($datosAmigo as $key => $value) {
-                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td><a href='#'>Modificar</a></td></tr>";
+                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td><a href='../Controlador/index_usuarios.php?action=vista,nombre=hola'>Modificar</a></td></tr>";
                }
             }
          ?>

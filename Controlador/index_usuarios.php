@@ -33,7 +33,7 @@
                     set_session("usu",$_POST["nom"],"id",$id);
 
                     //Se guarda el nombre del usuario, que está en la sesión
-                    $nUsu=$_SESSION["usu"];
+                    $nUsu=$_SESSION["usu"]; //NO ME SIRVE DE NADA PORQUE TENDRÍA QUE PASARSELO COMO UN PARÁMETRO A LA FUNCIÓN irVistaAmigos() Y AL ESTAR CONECTADO CON EL ACTION NO LE PUEDO PASAR NINGÚN PARÁMETRO AHÍ, ASI QUE TENGO QUE USAR LA SESIÓN DIRECTAMENTE
 
                     //Se redirige al dashboard en función del tipo de usuario
                     if($tipo=="usuario"){
@@ -46,7 +46,7 @@
                         require_once("../Vista/cabecera.html");
                         require_once("../Vista/menu_amigos.php");
                         require_once("../Vista/pie.html");
-                        // irVistaAmigos(); POR QUÉ SI LA FUNCIÓN TIENE LO MISMO, NO FUNCIONA??
+                        // irVistaAmigos($nUsu); 
                     }
                 }else{
                     //Si la contraseña no es correcta mostrar mensaje
@@ -65,6 +65,13 @@
 
     //Función para redirigir a la vista de amigos
     function irVistaAmigos(){
+        //Mostrar amigos antes de redirigir
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
+
         require_once("../Vista/cabecera.html");
         require_once("../Vista/menu_amigos.php");
         require_once("../Vista/pie.html");
