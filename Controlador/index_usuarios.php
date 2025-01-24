@@ -135,6 +135,7 @@
         //Si se inserta, redireccionar a la vista de juegos
         if($insertado){
             //Vista de juegos y mensaje de que se ha insertado correctamente
+            //Crear carpeta con el nombre del usuario y meter la imagen, luego coger esa ruta para meterla en la bd
         }else{
             //Misma vista y mensaje de error
         }
