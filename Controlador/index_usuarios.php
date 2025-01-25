@@ -46,7 +46,7 @@
                         require_once("../Vista/cabecera.html");
                         require_once("../Vista/menu_amigos.php");
                         require_once("../Vista/pie.html");
-                        // irVistaAmigos($nUsu); 
+                        // irVistaAmigos(); 
                     }
                 }else{
                     //Si la contraseña no es correcta mostrar mensaje
