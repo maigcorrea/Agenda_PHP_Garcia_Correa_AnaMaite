@@ -54,5 +54,21 @@
             $consulta->close();
             return $insertado;
         }
+
+
+        public function modificar_amigo($nom,$ape,$f_nac,$idAmigo){
+            $sentencia="UPDATE amigo SET nombre=?, apellidos=?, f_nac=? WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("sssi",$nom,$ape,$f_nac,$idAmigo);
+            $consulta->execute();
+            
+            $modificado=false;
+            if($consulta->affected_rows==1){
+                $modificado=true;
+            }
+
+            $consulta->close();
+            return $modificado;
+        }
     }
 ?>

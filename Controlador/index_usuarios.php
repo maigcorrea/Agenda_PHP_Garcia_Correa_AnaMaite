@@ -79,7 +79,6 @@
 
     //Función para redirigir al login 
     function iniSesion(){
-        // require_once("../Vista/cabecera.html");
         require_once("../Vista/login.php");
         require_once("../Vista/pie.html");
     }
@@ -115,6 +114,18 @@
             //Si no se ha insertado correctamente mostrar un mensaje
             $mensaje="Error. No se ha podido realizar la inserción";
             vistaInsertAmigos();
+        }
+    }
+
+    function modificarAmigo(){
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        $modificado=$amigo->modificar_amigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["idAmigo"]);
+        if($modificado){
+            //Redirigir al menu de amigos y mostrar toast de Exito
+            irVistaAmigos();
+        }else{
+            //Mostrar mensaje de error
         }
     }
 
@@ -168,6 +179,7 @@
         if($action=="enviar") $action="insertar";
         if($action=="insertar juego") $action="vistaInsertarJuego";
         if($action=="añadir juego") $action="insertarJuego";
+        if($action=="modificar amigo") $action="modificarAmigo";
 
         $action();
     }else{
