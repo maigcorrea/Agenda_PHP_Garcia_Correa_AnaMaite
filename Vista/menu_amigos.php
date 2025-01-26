@@ -13,6 +13,7 @@
      </form>
 
      <table>
+      <!-- RECUERDA QUE TIENES QUE MOSTRAR LA FECHA EN FORMATO ESPAÑOL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
          <tr><th>Nombre</th><th>Apellidos</th><th>Fecha de nacimiento</th><th> </th></tr>
          <?php
             if(isset($datosAmigo)){
