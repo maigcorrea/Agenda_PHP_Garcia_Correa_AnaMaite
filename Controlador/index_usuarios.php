@@ -228,6 +228,30 @@
     }
 
 
+
+
+    //PRÉSTAMOS
+
+    function vistaPrestamos(){
+        //Antes de redirigir a la vista hay que mostrar los préstamos
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        require_once("../Modelo/class_prestamo.php");
+        $prestamo=new Prestamo();
+
+        $datosPrestamo=$prestamo->get_prestamos($_SESSION["id"]);
+
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/prestamos.php");
+        require_once("../Vista/pie.html");
+    }
+
+
+
+
+
+
     if(isset($_REQUEST["action"])){
         $action=strtolower($_REQUEST["action"]);
 
