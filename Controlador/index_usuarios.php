@@ -148,15 +148,43 @@
     function insertarJuego(){
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
+
+        //PARA LA FOTO, crear carpeta con el nombre del usuario si todavía no existe y meter la imagen, luego coger esa ruta para meterla en la bd
+        
+        $ruta="../".$_SESSION["usu"]."/";
+        if(!file_exists($ruta)){
+            mkdir($ruta);
+        }
+
+        $nomOrig=$_FILES["img"]["name"]; //El nombre original de la imagen
+
+        //COMO NO HAY QUE RENOMBRAR EL ARCHIVO, LO COMENTADO NO HACE FALTA, EN CASO DE QUE HUBIERA QUE RENOMBRARLO, SE HARÍA LO SIGUIENTE:
+        //Si el nuevo nombre no tiene la extensión, hay que añadirsela para que el archivo se pueda ver correctamente
+        // $extension;
+        // if(!preg_match("'^[a-zA-Z0-9]+\.[a-z]+$'",$valorInput)){//Si el nuevo nombre no va seguido de . y la extensión, se le añade la extensión del nombre original
+        //     //Se concatena el nombre nuevo que se le va a poner a la imagen con la extensión del nombre original
+
+        //     $pos = strrpos($nomOrig, '.'); // Encuentra la posición del último punto dentro del nombre original
+        //     $extension=substr($nomOrig,$pos);//substr devuelve una parte del string a partir de una posición, en este caso devuelve una cadena a partir de la posición del . en el nombre original
+        //     $valorInput=$valorInput.$extension;//Se concatena el nuevo nombre con la extensión
+        // }
+
+        $origen=$_FILES["img"]["tmp_name"];
+        $destino=$ruta.$nomOrig; //Se concatena la ruta donde queremos guardar la imagen con el nuevo nombre (En este caso es el nombre original, no uno nuevo)
+
+        //Se mueve la imagen a la carpeta
+        move_uploaded_file($origen,$destino);
+
+
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
-        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],"url de imagen",$_SESSION["id"]); //Aquí van los datos del formulario
+        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$destino,$_SESSION["id"]); //Aquí van los datos del formulario
 
         //Si se inserta, redireccionar a la vista de juegos
         if($insertado){
             echo "Insertado";
             //Vista de juegos y mensaje de que se ha insertado correctamente
-            //Crear carpeta con el nombre del usuario y meter la imagen, luego coger esa ruta para meterla en la bd
+            
         }else{
             echo "Mal";
             //Misma vista y mensaje de error
