@@ -145,11 +145,12 @@
     }
 
 
-    function insertarJuego(){
+    //Función para guardar la foto seleccionada por el usuario en una carpeta en local
+    function guardarImg(){
+        //PARA LA FOTO, crear carpeta con el nombre del usuario si todavía no existe y meter la imagen, luego coger esa ruta para meterla en la bd
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
 
-        //PARA LA FOTO, crear carpeta con el nombre del usuario si todavía no existe y meter la imagen, luego coger esa ruta para meterla en la bd
         
         $ruta="../img/".$_SESSION["usu"]."/";
         if(!file_exists($ruta)){
@@ -175,6 +176,15 @@
         //Se mueve la imagen a la carpeta
         move_uploaded_file($origen,$destino);
 
+        return $destino;
+    }
+
+
+
+    function insertarJuego(){  
+
+        //Guardar la imagen en una carpeta para que luego se pueda subir esa ruta a la bd a la hora de insertar
+        $destino=guardarImg();
 
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
@@ -188,6 +198,25 @@
         }else{
             echo "Mal";
             //Misma vista y mensaje de error
+        }
+    }
+
+
+
+    function modificarJuego(){
+
+        //Guardar imagen en la carpeta para que luego se pueda subir esa ruta a la bd a la hora de modificar
+        $destino=guardarImg();
+
+        require_once("../Modelo/class_juego.php");
+        $juego=new Juego();
+
+        $modificado=$juego->modificar_juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$destino,$_POST["idJuego"]);
+        if($modificado){
+            //Redirigir al menu de juegos y mostrar toast de Exito
+            juegos();
+        }else{
+            //Mostrar mensaje de error
         }
     }
 
@@ -208,6 +237,7 @@
         if($action=="insertar juego") $action="vistaInsertarJuego";
         if($action=="añadir juego") $action="insertarJuego";
         if($action=="modificar amigo") $action="modificarAmigo";
+        if($action=="modificar juego") $action="modificarJuego";
 
         $action();
     }else{

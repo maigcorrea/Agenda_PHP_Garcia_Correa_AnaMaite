@@ -52,5 +52,20 @@
             return $exito;
         }
 
+        public function modificar_juego($titulo, $plataforma, $lanzamiento, $img, $idImagen){
+            $sentencia="UPDATE juego SET titulo=?, plataforma=?, lanzamiento=?, img=? WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("ssisi",$titulo, $plataforma, $lanzamiento, $img, $idImagen);
+            $consulta->execute();
+
+            $modificado=false;
+            if($consulta->affected_rows==1){
+                $modificado=true;
+            }
+
+            $consulta->close();
+            return $modificado;
+        }
+
     }
 ?>

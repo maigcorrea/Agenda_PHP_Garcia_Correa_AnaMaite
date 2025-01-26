@@ -8,7 +8,7 @@
          <?php
             if(isset($datosJuegos)){
                foreach ($datosJuegos as $key => $value) {
-                  echo "<tr><td><img src='".$value[0]."'/></td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href='#'>Modificar</a></td></tr>";
+                  echo "<tr><td><img src='".$value[0]."'/></td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href='../Controlador/index_usuarios.php?action=insertar juego&img=". urlencode($value[0])."&tit=".urlencode($value[1])."&plat=".urlencode($value[2])."&lanz=".urldecode($value[3])."&id=".urldecode($key)."'>Modificar</a></tr>";
                }
             }
          ?>
