@@ -1,6 +1,10 @@
 
 <body>
     <h1>Prestamos</h1>
+    <form action="../Controlador/index_usuarios.php" method="post">
+        <input type="submit" value="Insertar préstamo" name="action">
+        <input type="submit" value="Buscar préstamo" name="action">
+    </form>
 
     <table>
         <tr><th>Amigo</th><th>Juego</th><th> </th><th>Fecha</th><th>Devuelto</th></tr>
