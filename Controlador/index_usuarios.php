@@ -151,9 +151,9 @@
 
         //PARA LA FOTO, crear carpeta con el nombre del usuario si todavía no existe y meter la imagen, luego coger esa ruta para meterla en la bd
         
-        $ruta="../".$_SESSION["usu"]."/";
+        $ruta="../img/".$_SESSION["usu"]."/";
         if(!file_exists($ruta)){
-            mkdir($ruta);
+            mkdir($ruta,0777,true); //El tercer parámetro "true" permite crear directorios recursivamente, es decir, se crea tanto img cómo la carpeta con el nombre del usuario
         }
 
         $nomOrig=$_FILES["img"]["name"]; //El nombre original de la imagen
