@@ -16,7 +16,7 @@
                     if($value[4]==1) {echo "SI</td>";} else {echo "NO</td>";};
             ?>
 
-                <td><a href="#" <?php if($value[4]==1) echo "onclick='return false'" ?>>Devolver</a></td></tr>
+                <td><a href="../Controlador/index_usuarios.php?action=devolverPrestamo&id=<?php echo $key ?>" <?php if($value[4]==1) echo "onclick='return false'" ?>>Devolver</a></td></tr>
 
         <?php
                 }

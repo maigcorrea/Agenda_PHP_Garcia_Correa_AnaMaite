@@ -53,6 +53,22 @@
         }
 
 
+        public function devolver($id){
+            $sentencia="UPDATE prestamo SET devuelto=1 WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$id);
+            $consulta->execute();
+
+            $devuelto=false;
+            if($consulta->affected_rows==1){
+                $devuelto=true;
+            }
+
+            $consulta->close();
+            return $devuelto;
+        }
+
+
 
     }
 ?>

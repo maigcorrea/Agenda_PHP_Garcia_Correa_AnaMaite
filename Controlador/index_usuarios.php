@@ -289,6 +289,19 @@
     }
 
 
+    function devolverPrestamo(){
+        require_once("../Modelo/class_prestamo.php");
+        $prestamo=new Prestamo();
+        $devuelto=$prestamo->devolver($_GET["id"]);
+        if($devuelto){
+            vistaPrestamos();
+            //Mostrar toast de éxito
+        }else{
+            //Mostrar error
+        }
+    }
+
+
 
 
 
