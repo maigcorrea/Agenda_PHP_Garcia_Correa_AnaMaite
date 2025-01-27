@@ -36,5 +36,23 @@
             $consulta->close();
             return $datosPrestamo;
         }
+
+        public function insertar_prestamo($usuario,$amigo,$juego,$fecha){
+            $sentencia="INSERT INTO prestamo (usuario,amigo,juego,f_prestamo) VALUES (?,?,?,?);";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("iiis",$usuario,$amigo,$juego,$fecha);
+            $consulta->execute();
+
+            $insertado=false;
+            if($consulta->affected_rows==1){
+                $insertado=true;
+            }
+
+            $consulta->close();
+            return $insertado;
+        }
+
+
+
     }
 ?>

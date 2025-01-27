@@ -248,6 +248,46 @@
     }
 
 
+    function verInsertarPrestamo(){
+        //Cargar los datos antes de redirigir a la vista
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //AMIGOS
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
+
+        //JUEGOS (Tendría que seleccionar los juegos que no están prestados, me cago en la puta)
+        require_once("../Modelo/class_juego.php");
+        $juego=new Juego();
+        $datosJuegos=$juego->get_juegosDisp($_SESSION["id"]);
+
+
+
+        require_once("../Vista/cabecera.html");
+        require_once("../Vista/insertar_prestamo.php");
+        require_once("../Vista/pie.html");
+    }
+
+
+    function insertarPrestamo(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        require_once("../Modelo/class_prestamo.php");
+        $prestamo=new Prestamo();
+
+        $insertado=$prestamo->insertar_prestamo($_SESSION["id"],$_POST["amigos"],$_POST["juegos"],$_POST["dia"]);
+
+        if($insertado){
+            echo "Bien";
+        }else{
+            echo "Mal";
+        }
+    }
+
+
 
 
 
@@ -262,6 +302,8 @@
         if($action=="añadir juego") $action="insertarJuego";
         if($action=="modificar amigo") $action="modificarAmigo";
         if($action=="modificar juego") $action="modificarJuego";
+        if($action=="insertar prestamo") $action="verInsertarPrestamo";
+        if($action=="insertar") $action="insertarPrestamo";
 
         $action();
     }else{
@@ -269,12 +311,7 @@
         require_once("../Modelo/cookies_sesiones.php");
         if(is_session("usu")){
             //Si la sesión ya está abierta, se guarda el nombre del usuario, que está en la sesión
-            $nUsu=get_session("usu");
-
-            //Se redirige al menú de amigos
-            require_once("../Vista/cabecera.html");
-            require_once("../Vista/menu_amigos.php");
-            require_once("../Vista/pie.html");
+            irVistaAmigos();
         }else{
             //Si no hay sesión, se redirige al login
             iniSesion();

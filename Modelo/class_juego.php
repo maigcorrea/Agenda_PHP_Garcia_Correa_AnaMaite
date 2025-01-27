@@ -67,5 +67,23 @@
             return $modificado;
         }
 
+// 0 que no se ha devuelto, 1, que se ha devuelto
+        public function get_juegosDisp($usuario){
+            $sentencia="SELECT juego.id, juego.titulo, juego.plataforma FROM juego,prestamo WHERE juego.id=prestamo.juego AND prestamo.devuelto=1 AND prestamo.usuario=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$usuario);
+            $consulta->bind_result($id,$titulo,$plataforma);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[$id]=[$titulo,$plataforma];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
     }
 ?>
