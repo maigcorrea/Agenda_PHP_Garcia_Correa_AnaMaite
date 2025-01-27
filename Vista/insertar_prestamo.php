@@ -20,7 +20,7 @@
             <?php
                 if(isset($datosJuegos)){
                     foreach ($datosJuegos as $key => $value) {
-                        echo "<option value='$key'>$value[1]</option>";
+                        echo "<option value='$key'>$value[0] - $value[1]</option>";
                     }
                 }
             ?>
