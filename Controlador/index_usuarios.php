@@ -38,15 +38,20 @@
                     //Se redirige al dashboard en función del tipo de usuario
                     if($tipo=="usuario"){
                         //Mostrar amigos antes de redirigir
+                        $tipo="usuario";
                         require_once("../Modelo/class_amigo.php");
                         $amigo=new Amigo();
                         $datosAmigo=$amigo->get_Amigos($nUsu);
 
 
-                        require_once("../Vista/cabecera.html");
+                        require_once("../Vista/cabecera.php");
                         require_once("../Vista/menu_amigos.php");
                         require_once("../Vista/pie.html");
                         // irVistaAmigos(); 
+                    }else{
+                        //Redirigir a la vista de admin 
+                        $tipo="admin";
+
                     }
                 }else{
                     //Si la contraseña no es correcta mostrar mensaje
@@ -65,6 +70,9 @@
 
     //Función para redirigir a la vista de amigos
     function irVistaAmigos(){
+        //Como esta vista también puede ser la de contactos del admin, hay que comprobar el tipo
+        $tipo="usuario"; //TE HAS QUEDADO ESCRIBIENDO POR AQUÍ, QUE TENIAS QUE HACER OTRA FUNCIÓN CON UNA CONSULTA PARA COMPROBAR EL TIPO SEGÚN EL ID QUE HAY GUARDADO EN LA SESIÓN
+        //ME HAGO OTRA FUNCIÓN SÓLO PARA MOSTRAR LA CABECERA EN FUNCIÓN DEL TIPO DE USUARIO?
         //Mostrar amigos antes de redirigir
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
@@ -72,7 +80,7 @@
         $amigo=new Amigo();
         $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
 
-        require_once("../Vista/cabecera.html");
+        require_once("../Vista/cabecera.php");
         require_once("../Vista/menu_amigos.php");
         require_once("../Vista/pie.html");
     }
@@ -94,7 +102,7 @@
 
     //AMIGOS
     function vistaInsertAmigos(){
-        require_once("../Vista/cabecera.html");
+        require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_amigos.php");
         require_once("../Vista/pie.html");
     }
@@ -139,7 +147,7 @@
         $juego=new Juego();
         $datosJuegos=$juego->get_juegos($_SESSION["id"]);
 
-        require_once("../Vista/cabecera.html");
+        require_once("../Vista/cabecera.php");
         require_once("../Vista/juegos.php");
         require_once("../Vista/pie.html");
     }
@@ -222,7 +230,7 @@
 
 
     function vistaInsertarJuego(){
-        require_once("../Vista/cabecera.html");
+        require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_juego.php");
         require_once("../Vista/pie.html");
     }
@@ -242,7 +250,7 @@
 
         $datosPrestamo=$prestamo->get_prestamos($_SESSION["id"]);
 
-        require_once("../Vista/cabecera.html");
+        require_once("../Vista/cabecera.php");
         require_once("../Vista/prestamos.php");
         require_once("../Vista/pie.html");
     }
@@ -265,7 +273,7 @@
 
 
 
-        require_once("../Vista/cabecera.html");
+        require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_prestamo.php");
         require_once("../Vista/pie.html");
     }
