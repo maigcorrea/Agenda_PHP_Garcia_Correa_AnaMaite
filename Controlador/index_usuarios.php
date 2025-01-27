@@ -281,9 +281,10 @@
         $insertado=$prestamo->insertar_prestamo($_SESSION["id"],$_POST["amigos"],$_POST["juegos"],$_POST["dia"]);
 
         if($insertado){
-            echo "Bien";
+            //Redirigir a la página de préstamos y mostrar toast de Exito
+            vistaPrestamos();
         }else{
-            echo "Mal";
+            //Mensaje de error en la misma página o en la de préstamos? Preguntar a Érica a ella que le parece mejor
         }
     }
 
