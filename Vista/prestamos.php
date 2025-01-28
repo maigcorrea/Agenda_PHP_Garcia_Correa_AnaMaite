@@ -9,10 +9,12 @@
     <table>
         <tr><th>Amigo</th><th>Juego</th><th> </th><th>Fecha</th><th>Devuelto</th></tr>
         <?php
-        //RECUERDA QUE TIENES QUE PONER LA FECHA EN FORMATO ESPAÑOL
             if(isset($datosPrestamo)){
                 foreach ($datosPrestamo as $key => $value) {
-                    echo "<tr><td>$value[0]</td><td>$value[1]</td><td><img src='$value[2]' /></td><td>$value[3]</td><td>";
+                    //Poner fecha en formato Español
+                    $timestamp=strtotime($value[3]);
+                    $fecha=date("d-m-Y",$timestamp);
+                    echo "<tr><td>$value[0]</td><td>$value[1]</td><td><img src='$value[2]' /></td><td>$fecha</td><td>";
                     if($value[4]==1) {echo "SI</td>";} else {echo "NO</td>";};
             ?>
 

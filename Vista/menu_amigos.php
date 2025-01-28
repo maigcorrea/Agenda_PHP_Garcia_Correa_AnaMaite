@@ -13,13 +13,16 @@
      </form>
 
      <table>
-      <!-- RECUERDA QUE TIENES QUE MOSTRAR LA FECHA EN FORMATO ESPAÑOL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
          <tr><th>Nombre</th><th>Apellidos</th><th>Fecha de nacimiento</th><th> </th></tr>
          <?php
             if(isset($datosAmigo)){
                foreach ($datosAmigo as $key => $value) {
+                  //Poner fecha en formato Español
+                  $timestamp=strtotime($value[2]);
+                  $fecha=date("d-m-Y",$timestamp);
+
                   //Utilizo urlencode() para codificar los valores antes de pasarlos a la URL. Esto garantiza que los espacios y otros caracteres especiales sean válidos en la URL.
-                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
+                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$fecha."</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
                }
             }
          ?>
