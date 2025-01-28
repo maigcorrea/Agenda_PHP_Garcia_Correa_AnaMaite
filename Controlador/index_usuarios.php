@@ -70,13 +70,11 @@
 
     //Función para redirigir a la vista de amigos
     function irVistaAmigos(){
-        //Como esta vista también puede ser la de contactos del admin, hay que comprobar el tipo
-        //$tipo="usuario"; //TE HAS QUEDADO ESCRIBIENDO POR AQUÍ
-        //ME HAGO OTRA FUNCIÓN SÓLO PARA MOSTRAR LA CABECERA EN FUNCIÓN DEL TIPO DE USUARIO?
         //Mostrar amigos antes de redirigir
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
 
+        //Como esta vista también puede ser la de contactos del admin, hay que comprobar el tipo
         if($_SESSION["tipo"]=="admin"){
             //Se muestra la vista de contactos
             $tipo="admin";
@@ -253,6 +251,13 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
+        if(isset($_GET['id'])){
+            require_once("../Modelo/class_juego.php");
+            $juego=new Juego();
+            
+            $datos=$juego->ObtenerJuegoSegunId($_GET["id"]);
+        }
+
         require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_juego.php");
         require_once("../Vista/pie.html");
@@ -345,15 +350,16 @@
 
     if(isset($_REQUEST["action"])){
         $action=strtolower($_REQUEST["action"]);
+        $action = str_replace(' ', '', $action);
 
         //Estos if sirven para que en función del value del input submit, se llame a la función correspondiente si esta tiene otro nombre diferente
-        if($action=="insertar amigos") $action="vistaInsertAmigos";
+        if($action=="insertaramigos") $action="vistaInsertAmigos";
         if($action=="enviar") $action="insertar";
-        if($action=="insertar juego") $action="vistaInsertarJuego";
+        if($action=="insertarjuego") $action="vistaInsertarJuego";
         if($action=="añadir juego") $action="insertarJuego";
-        if($action=="modificar amigo") $action="modificarAmigo";
-        if($action=="modificar juego") $action="modificarJuego";
-        if($action=="insertar prestamo") $action="verInsertarPrestamo";
+        if($action=="modificaramigo") $action="modificarAmigo";
+        if($action=="modificarjuego") $action="modificarJuego";
+        if($action=="insertarprestamo") $action="verInsertarPrestamo";
         if($action=="insertar") $action="insertarPrestamo";
 
         $action();

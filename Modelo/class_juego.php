@@ -52,6 +52,8 @@
             return $exito;
         }
 
+        //FALTA POR IMPLEMENTAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //AL MODIFICAR LA IMAGEN DEL JUEGO, SI NO PONE NINGUNA QUE SE QUEDE LA QUE ESTABA EN LA BD, Y SI PONE UNA NUEVA, QUE LA ANTERIOR SE ELIMINE DE LA CARPETA
         public function modificar_juego($titulo, $plataforma, $lanzamiento, $img, $idImagen){
             $sentencia="UPDATE juego SET titulo=?, plataforma=?, lanzamiento=?, img=? WHERE id=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);
@@ -79,6 +81,24 @@
             $datos=[];
             while($consulta->fetch()){
                 $datos[$id]=[$titulo,$plataforma];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
+        //Función para obtener los datos de 1 juego según su id, esto nos sirve para, ala hora de modificar juegos, rellenar el formulario sin tener que pasarle los parámetros por la url, así es más seguro
+        public function obtenerJuegoSegunId($idJuego){
+            $sentencia="SELECT titulo,plataforma,lanzamiento,img FROM juego WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$idJuego);
+            $consulta->bind_result($titulo,$plataforma,$lanzamiento,$img);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos=[$titulo,$plataforma,$lanzamiento,$img];
             }
 
             $consulta->close();
