@@ -19,7 +19,7 @@
             if(isset($datosAmigo)){
                foreach ($datosAmigo as $key => $value) {
                   //Utilizo urlencode() para codificar los valores antes de pasarlos a la URL. Esto garantiza que los espacios y otros caracteres especiales sean válidos en la URL.
-                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&nombre=". urlencode($value[0])."&apellidos=".urlencode($value[1])."&nacimiento=".urlencode($value[2])."&id=".urldecode($key)."'>Modificar</a></td></tr>";
+                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
                }
             }
          ?>

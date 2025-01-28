@@ -70,5 +70,24 @@
             $consulta->close();
             return $modificado;
         }
+
+
+        //Función para obtener los datos de 1 amigo según su id, esto nos sirve para, a la hora de modificar amigos, rellenar el formulario sin tener que pasarle los parámetros por la url, así es más seguro
+        public function obtenerAmigoSegunId($idAmigo){
+            $sentencia="SELECT nombre,apellidos,f_nac FROM amigo WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$idAmigo);
+            $consulta->bind_result($nombre,$apeliidos,$fecha);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos=[$nombre,$apeliidos,$fecha];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
     }
 ?>
