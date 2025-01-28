@@ -358,6 +358,7 @@
 
     if(isset($_REQUEST["action"])){
         $action=strtolower($_REQUEST["action"]);
+        //Para juntar los strings si el valor del action tiene un espacio entre medio
         $action = str_replace(' ', '', $action);
 
         //Estos if sirven para que en función del value del input submit, se llame a la función correspondiente si esta tiene otro nombre diferente
