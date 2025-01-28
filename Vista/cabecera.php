@@ -11,7 +11,8 @@
     </style>
 </head>
 <header>
-    <a href="<?php if($tipo=="usuario"){ echo '../Controlador/index_usuarios.php?action=irVistaAmigos';} else{echo '../Controlador/index_usuarios.php?action=irVistaContactos';} ?>"><?php if($tipo=="usuario"){ echo 'Amigos';} else{ echo 'Contactos';} ?></a>
+    <?php echo $tipo?>
+    <a href="<?php if(strcmp($tipo,"usuario")==0){ echo '../Controlador/index_usuarios.php?action=irVistaAmigos';} else{echo '../Controlador/index_usuarios.php?action=irVistaContactos';} ?>"><?php if(strcmp($tipo,"usuario") == 0){ echo 'Amigos';} else{ echo 'Contactos';} ?></a>
     <a href="../Controlador/index_usuarios.php?action=juegos">Juegos</a>
     <a href="../Controlador/index_usuarios.php?action=vistaPrestamos">Prestamos</a>
     <a href="../Controlador/index_usuarios.php?action=salir">Salir</a>

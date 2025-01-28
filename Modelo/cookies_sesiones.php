@@ -29,10 +29,11 @@
 
 
     //Abrir una sesión
-    function set_session(String $nom1, $val1, String $nom2, $val2){
+    function set_session(String $nom1, $val1, String $nom2, $val2, String $nom3, $val3){
         start_session();
         $_SESSION[$nom1]=$val1;
         $_SESSION[$nom2]=$val2;
+        $_SESSION[$nom3]=$val3;
     }
 
 

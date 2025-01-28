@@ -30,13 +30,13 @@
 
                     //Se abren dos sesiones, una guarda el nombre del usuario y otra el id.
                     require_once("../Modelo/cookies_sesiones.php");
-                    set_session("usu",$_POST["nom"],"id",$id);
+                    set_session("usu",$_POST["nom"],"id",$id,"tipo",$tipo); 
 
                     //Se guarda el nombre del usuario, que está en la sesión
                     $nUsu=$_SESSION["usu"]; //NO ME SIRVE DE NADA PORQUE TENDRÍA QUE PASARSELO COMO UN PARÁMETRO A LA FUNCIÓN irVistaAmigos() Y AL ESTAR CONECTADO CON EL ACTION NO LE PUEDO PASAR NINGÚN PARÁMETRO AHÍ, ASI QUE TENGO QUE USAR LA SESIÓN DIRECTAMENTE
 
                     //Se redirige al dashboard en función del tipo de usuario
-                    if($tipo=="usuario"){
+                    if($_SESSION["tipo"]=="usuario"){
                         //Mostrar amigos antes de redirigir
                         $tipo="usuario";
                         require_once("../Modelo/class_amigo.php");
@@ -50,7 +50,7 @@
                         // irVistaAmigos(); 
                     }else{
                         //Redirigir a la vista de admin 
-                        $tipo="admin";
+                        
 
                     }
                 }else{
@@ -71,18 +71,25 @@
     //Función para redirigir a la vista de amigos
     function irVistaAmigos(){
         //Como esta vista también puede ser la de contactos del admin, hay que comprobar el tipo
-        $tipo="usuario"; //TE HAS QUEDADO ESCRIBIENDO POR AQUÍ, QUE TENIAS QUE HACER OTRA FUNCIÓN CON UNA CONSULTA PARA COMPROBAR EL TIPO SEGÚN EL ID QUE HAY GUARDADO EN LA SESIÓN
+        //$tipo="usuario"; //TE HAS QUEDADO ESCRIBIENDO POR AQUÍ
         //ME HAGO OTRA FUNCIÓN SÓLO PARA MOSTRAR LA CABECERA EN FUNCIÓN DEL TIPO DE USUARIO?
         //Mostrar amigos antes de redirigir
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
-        require_once("../Modelo/class_amigo.php");
-        $amigo=new Amigo();
-        $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
 
-        require_once("../Vista/cabecera.php");
-        require_once("../Vista/menu_amigos.php");
-        require_once("../Vista/pie.html");
+        if($_SESSION["tipo"]=="admin"){
+            //Se muestra la vista de contactos
+            $tipo="admin";
+        }else{
+            $tipo="usuario";
+            require_once("../Modelo/class_amigo.php");
+            $amigo=new Amigo();
+            $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
+    
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/menu_amigos.php");
+            require_once("../Vista/pie.html");
+        }
     }
 
     //Función para redirigir al login 
@@ -102,6 +109,13 @@
 
     //AMIGOS
     function vistaInsertAmigos(){
+
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
         require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_amigos.php");
         require_once("../Vista/pie.html");
@@ -146,6 +160,9 @@
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
         $datosJuegos=$juego->get_juegos($_SESSION["id"]);
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
 
         require_once("../Vista/cabecera.php");
         require_once("../Vista/juegos.php");
@@ -230,6 +247,12 @@
 
 
     function vistaInsertarJuego(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
         require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_juego.php");
         require_once("../Vista/pie.html");
@@ -244,6 +267,9 @@
         //Antes de redirigir a la vista hay que mostrar los préstamos
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
 
         require_once("../Modelo/class_prestamo.php");
         $prestamo=new Prestamo();
@@ -260,6 +286,9 @@
         //Cargar los datos antes de redirigir a la vista
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
 
         //AMIGOS
         require_once("../Modelo/class_amigo.php");
