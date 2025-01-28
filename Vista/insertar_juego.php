@@ -5,7 +5,7 @@
     <!-- Si se le pasa el valor de un id de juego a modificar por la url, se almacena en un campo oculto, así al enviar el formulario se podrá utilizar el valor en la función de modificarJuego() -->
     <?php if(isset($_GET["id"])) echo "<input type='hidden' name='idJuego' value='".htmlspecialchars($_GET['id'])."'>";?>
    
-    <!-- Si se le pasa el valor por la url, establecerlo como value para que el input se rellene automáticamente -->
+    <!-- Establecer los datos del array para rellenar los campos automáticamente-->
     <!-- Utilizo htmlspecialchars como una medida de seguridad para evitar ataques de inyección de código, convierte los caracteres especiales de HTML en su representación segura -->
     <label for="tit">Titulo</label><br>
     <input type="text" name="tit" value="<?php if(isset($datos[0])) echo $datos[0] ?>"><br>
