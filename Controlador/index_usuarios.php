@@ -236,13 +236,24 @@
 
     function modificarJuego(){
 
+        //En caso de que se haya modificado la imagen, se sube la nueva img y se borra la antigua, al contrario, se deja la misma imagen que había
+
+
         //Guardar imagen en la carpeta para que luego se pueda subir esa ruta a la bd a la hora de modificar
         $destino=guardarImg();
 
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
 
+        //Coger la ruta de la img actual del juego para luego eliminarla
+        $rutaImgActual=$juego->obtenerImgActual($_POST["idJuego"]);
+
+        //Actualizar con los nuevos datos
         $modificado=$juego->modificar_juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$destino,$_POST["idJuego"]);
+        
+        //Borrar la img anterior de la carpeta
+        unlink($rutaImgActual);
+        
         if($modificado){
             //Redirigir al menu de juegos y mostrar toast de Exito
             juegos();

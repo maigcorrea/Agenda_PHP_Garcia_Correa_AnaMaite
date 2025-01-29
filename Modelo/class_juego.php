@@ -105,5 +105,20 @@
             return $datos;
         }
 
+
+        public function obtenerImgActual($idJuego){
+            $sentencia="SELECT img FROM juego WHERE id=?";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$idJuego);
+            $consulta->bind_result($img);
+
+            $consulta->execute();
+
+            $consulta->fetch();
+
+            $consulta->close();
+            return $img;
+        }
+
     }
 ?>
