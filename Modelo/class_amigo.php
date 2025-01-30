@@ -38,6 +38,23 @@
             return $datosAmigos;
         }
 
+        public function get_AllAmigos(){
+            $sentencia="SELECT amigo.id,amigo.nombre,amigo.apellidos,amigo.f_nac,usuario.nombre FROM amigo,usuario WHERE amigo.usuario=usuario.id;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_result($idAmigo,$nombre,$apellidos,$f_nac,$duenio);
+
+            $consulta->execute();
+
+            $datosAmigos=[];
+
+            while($consulta->fetch()){
+                $datosAmigos[$idAmigo]=[$nombre,$apellidos,$f_nac,$duenio];
+            }
+
+            $consulta->close();
+            return $datosAmigos;
+        }
+
 
         public function insertarAmigo($nom,$ape,$f_nac,$usuario){
             $sentencia="INSERT INTO amigo (nombre, apellidos, f_nac, usuario) VALUES(?,?,?,?);";

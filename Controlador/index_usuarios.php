@@ -50,7 +50,16 @@
                         // irVistaAmigos(); 
                     }else{
                         //Redirigir a la vista de admin 
-                        
+                        $tipo="admin";
+                        //Sacar los amigos de todos los usuarios y quién insertó cada amigo
+                        require_once("../Modelo/class_amigo.php");
+                        $amigo=new Amigo();
+                        $datosAmigo=$amigo->get_AllAmigos();
+
+
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/menu_amigos.php");
+                        require_once("../Vista/pie.html");
 
                     }
                 }else{
@@ -78,6 +87,13 @@
         if($_SESSION["tipo"]=="admin"){
             //Se muestra la vista de contactos
             $tipo="admin";
+            require_once("../Modelo/class_amigo.php");
+            $amigo=new Amigo();
+            $datosAmigo=$amigo->get_AllAmigos();
+    
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/menu_amigos.php");
+            require_once("../Vista/pie.html");
         }else{
             $tipo="usuario";
             require_once("../Modelo/class_amigo.php");
