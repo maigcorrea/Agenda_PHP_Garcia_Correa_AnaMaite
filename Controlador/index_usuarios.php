@@ -130,6 +130,9 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
+        // if(strcmp($tipo,"usuario")){
+
+        // }
         //Para rellenar los campos del formulario si es modificar, es decir, si se le pasa por la url el id del amigo
         if(isset($_GET['id'])){
             require_once("../Modelo/class_amigo.php");

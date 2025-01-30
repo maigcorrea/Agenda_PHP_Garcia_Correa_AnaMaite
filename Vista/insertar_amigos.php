@@ -14,6 +14,18 @@
         <input type="text" name="ape" value="<?php if(isset($datos[1])) echo $datos[1];?>" ><br>
         <label for="nac">Fecha Nacimiento</label><br>
         <input type="date" name="nac" value="<?php if(isset($datos[2])) echo $datos[2];?>" ><br>
+        <!-- Añadir un campo más en caso de que el usuario sea administrador -->
+        <?php if($tipo=="admin") {
+            echo "
+                 <label for='duenio'>Dueño</label><br>
+                <select name='duenio'>
+                    <option>faerf</option>
+                    <option>faerf</option>
+                    <option>faerf</option>
+                </select><br>
+            
+            ";
+        }?>
 
         <!-- Cambiar botón en función de si se le pasa por la url el valor del nombre del amigo a modificar o no -->
         <input type="submit" value="<?php if(isset($_GET["nombre"])){echo "Modificar amigo";}else{echo "Enviar";}?>" name="action">
