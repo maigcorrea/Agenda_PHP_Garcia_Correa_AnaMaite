@@ -52,8 +52,7 @@
             return $exito;
         }
 
-        //FALTA POR IMPLEMENTAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //AL MODIFICAR LA IMAGEN DEL JUEGO, SI NO PONE NINGUNA QUE SE QUEDE LA QUE ESTABA EN LA BD, Y SI PONE UNA NUEVA, QUE LA ANTERIOR SE ELIMINE DE LA CARPETA
+        
         public function modificar_juego($titulo, $plataforma, $lanzamiento, $img, $idImagen){
             $sentencia="UPDATE juego SET titulo=?, plataforma=?, lanzamiento=?, img=? WHERE id=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);

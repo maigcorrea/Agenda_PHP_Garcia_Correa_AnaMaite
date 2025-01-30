@@ -14,7 +14,7 @@
     <label for="lanz">Año de lanzamiento</label><br>
     <input type="number" name="lanz" value="<?php if(isset($datos[2])) echo $datos[2] ?>"><br>
     <label for="img">Imagen:</label><br>
-    <input type="file" name="img" value="<?php if(isset($datos[3])) echo $datos[3] ?>"><br>
+    <input type="file" name="img"><br>
 
     <?php
 
