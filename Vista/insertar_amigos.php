@@ -20,7 +20,7 @@
                 echo "<label for='duenio'>Dueño</label><br>";
                 echo "<select name='duenio'>";
                 foreach ($usuarios as $key => $value) {
-                    echo "<option value='$key'>$value</option>";
+                    echo "<option value='$key'>$value[0]</option>";
                 }
                 echo "</select><br> ";
             }

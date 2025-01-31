@@ -14,6 +14,6 @@
     <?php echo $tipo?>
     <a href="<?php if(strcmp($tipo,"usuario")==0){ echo '../Controlador/index_usuarios.php?action=irVistaAmigos';} else{echo '../Controlador/index_usuarios.php?action=irVistaAmigos';} ?>"><?php if(strcmp($tipo,"usuario") == 0){ echo 'Amigos';} else{ echo 'Contactos';} ?></a>
     <a href="../Controlador/index_usuarios.php?action=juegos">Juegos</a>
-    <a href="<?php if(strcmp($tipo,"usuario")==0){ echo '../Controlador/index_usuarios.php?action=vistaPrestamos';} else{echo '../Controlador/index_usuarios.php?action=';} ?>"><?php if(strcmp($tipo,"usuario") == 0){ echo 'Prestamos';} else{ echo 'Usuarios';} ?></a>
+    <a href="<?php if(strcmp($tipo,"usuario")==0){ echo '../Controlador/index_usuarios.php?action=vistaPrestamos';} else{echo '../Controlador/index_usuarios.php?action=irVistaUsuarios';} ?>"><?php if(strcmp($tipo,"usuario") == 0){ echo 'Prestamos';} else{ echo 'Usuarios';} ?></a>
     <a href="../Controlador/index_usuarios.php?action=salir">Salir</a>
 </header>

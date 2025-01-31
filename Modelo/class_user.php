@@ -102,19 +102,21 @@
 
 
         public function get_usuarios(){
-            $sentencia="SELECT id,nombre FROM usuario WHERE nombre!='admin';";
+            $sentencia="SELECT id,nombre,contrasenia FROM usuario WHERE nombre!='admin';";
             $consulta=$this->conn->getConection()->prepare($sentencia);
-            $consulta->bind_result($id,$nombre);
+            $consulta->bind_result($id,$nombre,$contrasenia);
             $consulta->execute();
 
             $usuarios=[];
             while($consulta->fetch()){
-                $usuarios[$id]=$nombre;
+                $usuarios[$id]=[$nombre,$contrasenia];
             }
 
             $consulta->close();
             return $usuarios;
         }
+
+        
 
         
     }

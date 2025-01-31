@@ -425,6 +425,24 @@
         
     // }
 
+    //Función para ir a la vista de usuarios desde el panel de admin
+    function irVistaUsuarios(){
+        //Cargar los datos antes de redirigir a la vista
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+        require_once("../Modelo/class_user.php");
+        $usuario=new Usuario();
+        $datos=$usuario->get_usuarios();
+
+        require_once("../Vista/cabecera.php");
+        require_once("../Vista/usuarios.php");
+        require_once("../Vista/pie.html");
+    }
+
 
 
 
