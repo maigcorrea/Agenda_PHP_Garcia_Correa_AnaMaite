@@ -121,7 +121,7 @@
             
             $modificado=false;
             if($consulta->affected_rows==1){
-                $modificado==true;
+                $modificado=true;
             }
 
             $consulta->close();
