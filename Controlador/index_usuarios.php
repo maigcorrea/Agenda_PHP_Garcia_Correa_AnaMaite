@@ -130,9 +130,13 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
-        // if(strcmp($tipo,"usuario")){
+        //Si el tipo es admin, sacar un array con los nombres de los usuarios
+        if(strcmp($tipo,"admin")==0){
+            require_once("../Modelo/class_user.php");
+            $usuario=new Usuario();
+            $usuarios=$usuario->get_usuarios();
+        }
 
-        // }
         //Para rellenar los campos del formulario si es modificar, es decir, si se le pasa por la url el id del amigo
         if(isset($_GET['id'])){
             require_once("../Modelo/class_amigo.php");
@@ -150,18 +154,34 @@
         //Se necesita start_session para abrir una sesión y poder utilizar el valor de la sesión id como parámetro
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
+        $tipo=$_SESSION["tipo"];
 
         require_once("../Modelo/class_amigo.php");
         $amigo=new Amigo();
-        if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
-            //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
-            //Falta mostrar el mensaje
-            iniSesion();
+
+        //Si el tipo es usuario, el usuario al que se le inserta el amigo es a ese usuario identificado, si es admin, se elige al usuario al que se quiere insertar el amigo
+        if(strcmp($tipo,"usuario") == 0){
+            if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
+                //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
+                //Falta mostrar el mensaje
+                irVistaAmigos();
+            }else{
+                //Si no se ha insertado correctamente mostrar un mensaje
+                $mensaje="Error. No se ha podido realizar la inserción";
+                vistaInsertAmigos();
+            }
         }else{
-            //Si no se ha insertado correctamente mostrar un mensaje
-            $mensaje="Error. No se ha podido realizar la inserción";
-            vistaInsertAmigos();
+            if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["duenio"])){
+                //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
+                //Falta mostrar el mensaje
+                irVistaAmigos();
+            }else{
+                //Si no se ha insertado correctamente mostrar un mensaje
+                $mensaje="Error. No se ha podido realizar la inserción";
+                vistaInsertAmigos();
+            }
         }
+        
     }
 
     function modificarAmigo(){
@@ -400,6 +420,12 @@
 
 
 
+    //ADMINISTRADOR
+    // function insertarContacto(){
+        
+    // }
+
+
 
 
 
@@ -410,13 +436,15 @@
 
         //Estos if sirven para que en función del value del input submit, se llame a la función correspondiente si esta tiene otro nombre diferente
         if($action=="insertaramigos") $action="vistaInsertAmigos";
-        if($action=="enviar") $action="insertar";
+        
         if($action=="insertarjuego") $action="vistaInsertarJuego";
         if($action=="añadir juego") $action="insertarJuego";
         if($action=="modificaramigo") $action="modificarAmigo";
         if($action=="modificarjuego") $action="modificarJuego";
         if($action=="insertarprestamo") $action="verInsertarPrestamo";
         if($action=="insertar") $action="insertarPrestamo";
+        if($action=="enviar") $action="insertar";
+        
 
         $action();
     }else{

@@ -101,6 +101,20 @@
         }
 
 
+        public function get_usuarios(){
+            $sentencia="SELECT id,nombre FROM usuario WHERE nombre!='admin';";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_result($id,$nombre);
+            $consulta->execute();
+
+            $usuarios=[];
+            while($consulta->fetch()){
+                $usuarios[$id]=$nombre;
+            }
+
+            $consulta->close();
+            return $usuarios;
+        }
 
         
     }

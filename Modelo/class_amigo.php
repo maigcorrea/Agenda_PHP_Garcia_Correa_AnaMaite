@@ -106,5 +106,10 @@
             $consulta->close();
             return $datos;
         }
+
+
+        // public function insertar_Contactos($nom,$ape,$f_nac,$usuario){
+        //     $sentencia=""
+        // }
     }
 ?>
