@@ -111,5 +111,21 @@
         // public function insertar_Contactos($nom,$ape,$f_nac,$usuario){
         //     $sentencia=""
         // }
+
+        public function modificarAmigoAdmin($nom,$ape,$f_nac,$duenio,$idAmigo){
+            $sentencia="UPDATE amigo SET nombre=?, apellidos=?, f_nac=?, usuario=? WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("sssii", $nom,$ape,$f_nac,$duenio,$idAmigo);
+            
+            $consulta->execute();
+            
+            $modificado=false;
+            if($consulta->affected_rows==1){
+                $modificado==true;
+            }
+
+            $consulta->close();
+            return $modificado;
+        }
     }
 ?>

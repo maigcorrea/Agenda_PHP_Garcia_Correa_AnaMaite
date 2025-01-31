@@ -185,14 +185,31 @@
     }
 
     function modificarAmigo(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+        $tipo=$_SESSION["tipo"];
+
         require_once("../Modelo/class_amigo.php");
         $amigo=new Amigo();
-        $modificado=$amigo->modificar_amigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["idAmigo"]);
-        if($modificado){
-            //Redirigir al menu de amigos y mostrar toast de Exito
-            irVistaAmigos();
+
+        //Si el tipo es usuario se modifica sin indicarle el dueño, si es admin hay que indicarle el dueño
+        if(strcmp($tipo,"usuario")==0){
+            $modificado=$amigo->modificar_amigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["idAmigo"]);
+            if($modificado){
+                //Redirigir al menu de amigos y mostrar toast de Exito
+                irVistaAmigos();
+            }else{
+                //Mostrar mensaje de error
+            }
         }else{
-            //Mostrar mensaje de error
+            $modificado=$amigo->modificarAmigoAdmin($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["duenio"],$_POST["idAmigo"]);
+            if($modificado){
+                //Redirigir al menu de amigos y mostrar toast de Exito
+                irVistaAmigos();
+            }else{
+                //Mostrar mensaje de error
+                echo "Error";
+            }
         }
     }
 
