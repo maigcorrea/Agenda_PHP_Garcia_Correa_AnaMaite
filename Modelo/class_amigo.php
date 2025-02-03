@@ -100,7 +100,7 @@
 
             $datos=[];
             while($consulta->fetch()){
-                $datos=[$nombre,$apeliidos,$fecha];
+                $datos[]=[$nombre,$apeliidos,$fecha];
             }
 
             $consulta->close();
@@ -141,6 +141,25 @@
 
             $consulta->close();
             return $modificado;
+        }
+
+
+        public function buscarAmigo($busqueda){
+            $sentencia="SELECT nombre, apellidos, f_nac FROM amigo WHERE nombre LIKE ? OR apellidos LIKE ?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $param=$busqueda."%";
+            $consulta->bind_param("ss", $param, $param);
+            $consulta->bind_result($nom,$ape,$f_nac);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[]=[$nom,$ape,$f_nac];
+            }
+
+            $consulta->close();
+            return $datos;
         }
     }
 ?>

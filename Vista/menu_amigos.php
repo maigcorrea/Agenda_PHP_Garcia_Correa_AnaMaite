@@ -9,7 +9,7 @@
 
      <form action="../Controlador/index_usuarios.php" method="POST">
         <input type="submit" value="Insertar amigos" name="action">
-        <input type="submit" value="Buscar amigos" name="action">
+        <input type="submit" value="Buscar Amigos" name="action">
      </form>
 
      <table>

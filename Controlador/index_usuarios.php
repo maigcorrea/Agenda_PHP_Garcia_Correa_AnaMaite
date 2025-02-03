@@ -217,6 +217,49 @@
     }
 
 
+    function vistaBuscar(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+        if(strcmp($tipo,"usuario")==0){
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/buscador.php");
+            require_once("../Vista/pie.html");
+        }else{
+
+        }
+    }
+
+
+    function buscar(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        $busqueda=ucfirst(trim($_POST["busqueda"]));
+
+        //Si el campo no se ha enviado vacío, se muestran los resultados
+        if(!empty($busqueda)){
+            $resultadosBusqueda=$amigo->buscarAmigo($busqueda);
+        }else{
+            $msj="El campo está vacío, rellenalo para buscar";
+        }
+
+
+        require_once("../Vista/cabecera.php");
+        require_once("../Vista/buscador.php");
+        require_once("../Vista/pie.html");
+    }
+
+
     //JUEGOS
     function juegos(){
         require_once("../Modelo/cookies_sesiones.php");
@@ -536,6 +579,7 @@
         if($action=="insertarprestamo") $action="verInsertarPrestamo";
         if($action=="insertar") $action="insertarPrestamo";
         if($action=="enviar") $action="insertar";
+        if($action=="buscaramigos") $action="vistaBuscar";
         
 
         $action();
