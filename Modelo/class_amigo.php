@@ -112,6 +112,21 @@
         //     $sentencia=""
         // }
 
+        //Función para averiguar el dueño de un amigo en función del id
+        public function encontrarDuenio($id){
+            $sentencia="SELECT usuario FROM amigo WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i", $id);
+            $consulta->bind_result($duenio);
+            
+            $consulta->execute();
+            $consulta->fetch();
+
+            $consulta->close();
+            return $duenio;
+
+        }
+
         public function modificarAmigoAdmin($nom,$ape,$f_nac,$duenio,$idAmigo){
             $sentencia="UPDATE amigo SET nombre=?, apellidos=?, f_nac=?, usuario=? WHERE id=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);

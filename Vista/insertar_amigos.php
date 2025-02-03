@@ -21,7 +21,14 @@
                 echo "<label for='duenio'>Dueño</label><br>";
                 echo "<select name='duenio'>";
                 foreach ($usuarios as $key => $value) {
-                    echo "<option value='$key'>$value[0]</option>";
+                    echo "<option value='$key'";
+                    if(isset($duenio)){
+                        if($duenio==$key){
+                            echo "selected";
+                        }
+                    }
+                    
+                    echo ">$value[0]</option>";
                 }
                 echo "</select><br> ";
             }

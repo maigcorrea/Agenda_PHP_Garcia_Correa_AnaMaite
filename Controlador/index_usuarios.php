@@ -143,6 +143,9 @@
             $amigo=new Amigo();
             
             $datos=$amigo->ObtenerAmigoSegunId($_GET["id"]);
+
+            //Para rellenar el campo select del Dueño, se saca el dueño actual
+            $duenio=$amigo->encontrarDuenio($_GET["id"]);
         }
 
         require_once("../Vista/cabecera.php");

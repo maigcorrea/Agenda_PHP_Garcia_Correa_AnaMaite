@@ -1,3 +1,6 @@
+<!-- Cambiar título en función de si se le pasa por la url el valor del id del juego a modificar o no -->
+<h1><?php if(isset($_GET["id"])){echo "Modificar";}else{echo "Nuevo";}?> Usuario</h1>
+
 <body>
     <form action="" method="POST">
         <label for="nombre">Nombre:</label><br>
