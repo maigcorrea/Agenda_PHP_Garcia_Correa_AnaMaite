@@ -116,7 +116,21 @@
             return $usuarios;
         }
 
-        
+        public function insertar_usuario($nom, $contr){
+            //ANTES HABRÍA QUE COMPROBAR QUE LA CONTRASEÑA ES SEGURA CON UNOS PREG_MATH Y CIFRARLA A LA HORA DEMETERLA EN LA BD
+            $sentencia="INSERT INTO usuario (nombre,contrasenia) VALUES (?,?);";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("ss",$nom, $contr);
+            $consulta->execute();
+
+            $insertado=false;
+            if($consulta->affected_rows==1){
+                $insertado=true;
+            }
+
+            $consulta->close();
+            return $insertado;
+        }
 
         
     }

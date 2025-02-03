@@ -461,6 +461,37 @@
     }
 
 
+    //Función para redirigir a la vista de insertar usuarios
+    function insertarUsuarios(){
+
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+
+        require_once("../Vista/cabecera.php");
+        require_once("../Vista/insertar_usuarios.php");
+        require_once("../Vista/pie.html");
+
+    }
+
+    //Función para insertar a un nuevo usuario
+    function insertarUsuario(){
+        
+        require_once("../Modelo/class_user.php");
+        $usuario=new Usuario();
+        $insertado=$usuario->insertar_usuario($_POST["nombre"],$_POST["contr"]);
+        if($insertado){
+            //Toast de éxito y redirigir al menu de usuarios
+            irVistaUsuarios();
+        }else{
+            //Mensaje de Error
+            echo "Error";
+        }
+    }
+
 
 
 
