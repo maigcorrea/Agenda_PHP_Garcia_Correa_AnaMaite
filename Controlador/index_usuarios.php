@@ -511,7 +511,7 @@
         $modificado=$usuario->modificar_usuario($_POST["nombre"], $_POST["contr"], $_POST["idUsu"]);
         if($modificado){
             //Éxito y redirigir a la vista
-            insertarUsuarios();
+            irVistaUsuarios();
         }else{
             echo "Error";
         }
