@@ -4,7 +4,7 @@
 
     <form action="../Controlador/index_usuarios.php" method="POST">
         <!-- Si se le pasa el valor de un id de amigo a modificar por la url, se almacena en un campo oculto, así al enviar el formulario se podrá utilizar el valor en la función de modificarAmigo() -->
-        <?php if(isset($_GET["id"])) echo "<input type='hidden' name='idAmigo' value='".htmlspecialchars($_GET['id'])."'>"; echo $_GET['id'];?>
+        <?php if(isset($_GET["id"])) echo "<input type='hidden' name='idAmigo' value='".htmlspecialchars($_GET['id'])."'>"; if(isset($_GET["id"])) echo $_GET['id'];?>
         
 
         <label for="nombre">Nombre</label><br>
