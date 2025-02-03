@@ -473,12 +473,20 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
+        //Sacar los datos para autorrellenar los campos si se le pasa por url el id del usuaruio a modificar
+        if(isset($_GET["id"])){
+            require_once("../Modelo/class_user.php");
+            $usuario=new Usuario();
+            $datos=$usuario->datosUsuarioModificar($_GET["id"]);
+        }
+
 
         require_once("../Vista/cabecera.php");
         require_once("../Vista/insertar_usuarios.php");
         require_once("../Vista/pie.html");
 
     }
+
 
     //Función para insertar a un nuevo usuario
     function insertarUsuario(){
@@ -495,6 +503,21 @@
         }
     }
 
+
+    //Función para modificar usuario
+    function modificarUsuario(){
+        require_once("../Modelo/class_user.php");
+        $usuario=new Usuario();
+        $modificado=$usuario->modificar_usuario($_POST["nombre"], $_POST["contr"], $_POST["idUsu"]);
+        if($modificado){
+            //Éxito y redirigir a la vista
+            insertarUsuarios();
+        }else{
+            echo "Error";
+        }
+
+
+    }
 
 
 

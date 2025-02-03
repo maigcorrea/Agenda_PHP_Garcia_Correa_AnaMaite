@@ -14,7 +14,7 @@
                 //Pasar la contraseña a asteriscos
                 $long=strlen($value[1]);
                 $ast=str_repeat("*",$long);
-                echo "<tr><td>".$key."</td><td>".$value[0]."</td><td>".$ast."</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
+                echo "<tr><td>".$key."</td><td>".$value[0]."</td><td>".$ast."</td><td><a href='../Controlador/index_usuarios.php?action=Insertar usuarios&id=".urldecode($key)."'>Modificar</a></td></tr>";
             }
         }
     ?>

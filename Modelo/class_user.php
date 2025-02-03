@@ -132,6 +132,42 @@
             return $insertado;
         }
 
+
+        //Función para seleccionar nombre y contraseña de un usuario en función de su id(Para modificar un usuario)
+        public function datosUsuarioModificar($id){
+            $sentencia="SELECT nombre,contrasenia FROM usuario WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$id);
+            $consulta->bind_result($nombre,$contrasenia);
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos=[$nombre,$contrasenia];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
+
+
+        //Función para modificar un usuario desde el administrador
+        public function modificar_usuario($nom, $contr, $id){
+            $sentencia="UPDATE usuario SET nombre=?, contrasenia=? WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("ssi",$nom,$contr,$id);
+
+            $consulta->execute();
+            $modificado=false;
+            if($consulta->affected_rows==1){
+                $modificado=true;
+            }
+
+            $consulta->close();
+            return $modificado;
+        }
+
         
     }
 ?>
