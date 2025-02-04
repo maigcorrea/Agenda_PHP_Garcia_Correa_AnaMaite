@@ -119,5 +119,24 @@
             return $img;
         }
 
+
+        public function buscarJuego($busqueda){
+            $sentencia="SELECT img, titulo, plataforma, lanzamiento  FROM juego WHERE titulo LIKE ? OR plataforma LIKE ?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $param=$busqueda."%";
+            $consulta->bind_param("ss", $param, $param);
+            $consulta->bind_result($img, $titulo, $plataforma, $lanzamiento);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[]=[$img, $titulo, $plataforma, $lanzamiento];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
     }
 ?>

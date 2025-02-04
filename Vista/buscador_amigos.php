@@ -4,6 +4,8 @@
     <form action="" method="post">
         <label for="busqueda">Nombre / Apellidos del amigo</label><br>
         <input type="search" name="busqueda" id=""><br>
+        <!-- Mediante un campo oculto indico de qué es la busqueda para saber dentro de una función en el controlador a qué clase y método llamar -->
+        <input type="hidden" name="tipoBusq" value="amigos">
 
         <input type="submit" value="Buscar" name="action">
     </form>

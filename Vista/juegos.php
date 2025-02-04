@@ -1,6 +1,6 @@
 <form action="../Controlador/index_usuarios.php" method="post">
     <input type="submit" value="Insertar juego" name="action">
-    <input type="submit" value="Buscar juego" name="action">
+    <input type="submit" value="Buscar juegos" name="action">
 </form>
 
 <table>

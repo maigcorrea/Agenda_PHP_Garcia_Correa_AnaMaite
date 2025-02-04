@@ -217,7 +217,7 @@
     }
 
 
-    function vistaBuscar(){
+    function vistaBuscarAmigos(){
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
 
@@ -226,7 +226,7 @@
 
         if(strcmp($tipo,"usuario")==0){
             require_once("../Vista/cabecera.php");
-            require_once("../Vista/buscador.php");
+            require_once("../Vista/buscador_amigos.php");
             require_once("../Vista/pie.html");
         }else{
 
@@ -241,22 +241,55 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
-
-        require_once("../Modelo/class_amigo.php");
-        $amigo=new Amigo();
+        //Formatear el valor de búsqueda
         $busqueda=ucfirst(trim($_POST["busqueda"]));
+
+
+        
+        
 
         //Si el campo no se ha enviado vacío, se muestran los resultados
         if(!empty($busqueda)){
-            $resultadosBusqueda=$amigo->buscarAmigo($busqueda);
+            //En función del valor de un campo oculto, se sabe que datos estamos buscando, si de amigos, juegos o préstamos
+            // if($_POST["tipoBusq"]=="amigos"){
+            //     require_once("../Modelo/class_amigo.php");
+            //     $amigo=new Amigo();
+            //     $resultadosBusqueda=$amigo->buscarAmigo($busqueda);
+            // }else if($_POST["juegos"]){
+            //     require_once("../Modelo/class_juego.php");
+            //     $juego=new Juego();
+            // }
+
+            switch ($_POST["tipoBusq"]) {
+                case 'amigos':
+                    require_once("../Modelo/class_amigo.php");
+                    $amigo=new Amigo();
+                    $resultadosBusqueda=$amigo->buscarAmigo($busqueda);
+                    require_once("../Vista/cabecera.php");
+                    require_once("../Vista/buscador_amigos.php");
+                    require_once("../Vista/pie.html");
+                    break;
+                
+                case 'juegos':
+                    require_once("../Modelo/class_juego.php");
+                    $juego=new Juego();
+                    $resultadosBusqueda=$juego->buscarJuego($busqueda);
+                    require_once("../Vista/cabecera.php");
+                    require_once("../Vista/buscador_juegos.php");
+                    require_once("../Vista/pie.html");
+                    break;
+            }
+            
         }else{
             $msj="El campo está vacío, rellenalo para buscar";
+            //Aqui se redirigiria a la vista en función del campo oculto también
+            // require_once("../Vista/cabecera.php");
+            // require_once("../Vista/buscador_amigos.php");
+            // require_once("../Vista/pie.html");
         }
 
 
-        require_once("../Vista/cabecera.php");
-        require_once("../Vista/buscador.php");
-        require_once("../Vista/pie.html");
+        
     }
 
 
@@ -401,6 +434,22 @@
         require_once("../Vista/pie.html");
     }
 
+
+    function vistaBuscarJuegos(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+        if(strcmp($tipo,"usuario")==0){
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/buscador_juegos.php");
+            require_once("../Vista/pie.html");
+        }else{
+
+        }
+    }
 
 
 
@@ -579,7 +628,8 @@
         if($action=="insertarprestamo") $action="verInsertarPrestamo";
         if($action=="insertar") $action="insertarPrestamo";
         if($action=="enviar") $action="insertar";
-        if($action=="buscaramigos") $action="vistaBuscar";
+        if($action=="buscaramigos") $action="vistaBuscarAmigos";
+        if($action=="buscarjuegos") $action="vistaBuscarJuegos";
         
 
         $action();
