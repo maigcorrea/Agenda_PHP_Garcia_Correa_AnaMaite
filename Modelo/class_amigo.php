@@ -100,7 +100,7 @@
 
             $datos=[];
             while($consulta->fetch()){
-                $datos[]=[$nombre,$apeliidos,$fecha];
+                $datos=[$nombre,$apeliidos,$fecha];
             }
 
             $consulta->close();
