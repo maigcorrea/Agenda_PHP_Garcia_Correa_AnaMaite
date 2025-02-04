@@ -69,6 +69,30 @@
         }
 
 
+        public function buscarPrestamo($busqueda){
+            $sentencia="SELECT usuario.nombre, amigo.nombre, juego.titulo, prestamo.f_prestamo, prestamo.devuelto
+                        FROM prestamo
+                        JOIN usuario ON prestamo.usuario = usuario.id
+                        JOIN amigo ON prestamo.amigo = amigo.id
+                        JOIN juego ON prestamo.juego = juego.id
+                        WHERE usuario.nombre LIKE ? OR juego.titulo LIKE ?;";
+
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $param=$busqueda."%";
+            $consulta->bind_param("ss", $param, $param);
+            $consulta->bind_result($usu, $amigo, $juego, $f_pres, $dev);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[]=[$usu, $amigo, $juego, $f_pres, $dev];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
 
     }
 ?>

@@ -3,7 +3,7 @@
     <h1>Prestamos</h1>
     <form action="../Controlador/index_usuarios.php" method="post">
         <input type="submit" value="Insertar prestamo" name="action">
-        <input type="submit" value="Buscar préstamo" name="action">
+        <input type="submit" value="Buscar prestamos" name="action">
     </form>
 
     <table>

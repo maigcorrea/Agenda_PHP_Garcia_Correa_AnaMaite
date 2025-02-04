@@ -278,6 +278,15 @@
                     require_once("../Vista/buscador_juegos.php");
                     require_once("../Vista/pie.html");
                     break;
+                
+                case 'prestamos':
+                    require_once("../Modelo/class_prestamo.php");
+                    $prestamo=new Prestamo();
+                    $resultadosBusqueda=$prestamo->buscarPrestamo($busqueda);
+                    require_once("../Vista/cabecera.php");
+                    require_once("../Vista/buscador_prestamos.php");
+                    require_once("../Vista/pie.html");
+                    break;
             }
             
         }else{
@@ -531,6 +540,23 @@
     }
 
 
+    function vistaBuscarPrestamos(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+        if(strcmp($tipo,"usuario")==0){
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/buscador_prestamos.php");
+            require_once("../Vista/pie.html");
+        }else{
+
+        }
+    }
+
+
 
     //ADMINISTRADOR
     // function insertarContacto(){
@@ -628,8 +654,9 @@
         if($action=="insertarprestamo") $action="verInsertarPrestamo";
         if($action=="insertar") $action="insertarPrestamo";
         if($action=="enviar") $action="insertar";
-        if($action=="buscaramigos") $action="vistaBuscarAmigos";
+        if($action=="buscarprestamos") $action="vistaBuscarPrestamos";
         if($action=="buscarjuegos") $action="vistaBuscarJuegos";
+        if($action=="buscaramigos") $action="vistaBuscarAmigos";
         
 
         $action();
