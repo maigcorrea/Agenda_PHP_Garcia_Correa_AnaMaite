@@ -75,7 +75,7 @@
                         JOIN usuario ON prestamo.usuario = usuario.id
                         JOIN amigo ON prestamo.amigo = amigo.id
                         JOIN juego ON prestamo.juego = juego.id
-                        WHERE usuario.nombre LIKE ? OR juego.titulo LIKE ?;";
+                        WHERE amigo.nombre LIKE ? OR juego.titulo LIKE ?;";
 
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $param=$busqueda."%";

@@ -11,7 +11,7 @@
     </form>
 
     <?php
-        if(isset($resultadosBusqueda)){
+        if(isset($resultadosBusqueda)&& !empty($resultadosBusqueda)){
             echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th></tr>";
             
             foreach ($resultadosBusqueda as $key => $value) {
@@ -19,6 +19,8 @@
             }
 
             echo "</table>";
+        }else{
+            echo "No hay resultados compatibles con tu búsqueda";
         }
 
         if(isset($msj)){

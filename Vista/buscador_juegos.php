@@ -10,7 +10,7 @@
     </form>
 
     <?php
-        if(isset($resultadosBusqueda)){
+        if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
             echo "<table><tr><th>Juego</th><th>Título</th><th>Plataforma</th><th>Año de lanzamiento</th></tr>";
             
             foreach ($resultadosBusqueda as $key => $value) {
@@ -18,6 +18,8 @@
             }
 
             echo "</table>";
+        }else{
+            echo "No hay resultados compatibles con tu búsqueda";
         }
 
         if(isset($msj)){
