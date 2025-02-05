@@ -11,20 +11,22 @@
     </form>
 
     <?php
-        if(isset($resultadosBusqueda)&& !empty($resultadosBusqueda)){
-            echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th></tr>";
-            
-            foreach ($resultadosBusqueda as $key => $value) {
-                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td></tr>";
+    //Se comprueba si se ha enviado el formulario, si es así, si hat resultados compatibles con la búsqueda se muestran, sino, aparece un mensaje
+
+            if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
+                echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th></tr>";
+                
+                foreach ($resultadosBusqueda as $key => $value) {
+                    echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td></tr>";
+                }
+
+                echo "</table>";
+            }else if(empty($resultadosBusqueda)){
+                echo "No hay resultados compatibles con tu búsqueda";
             }
 
-            echo "</table>";
-        }else{
-            echo "No hay resultados compatibles con tu búsqueda";
-        }
-
-        if(isset($msj)){
-            echo $msj;
-        }
+            if(isset($msj)){
+                echo $msj;
+            }
     ?>
 </body>

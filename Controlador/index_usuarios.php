@@ -264,7 +264,7 @@
                 case 'amigos':
                     require_once("../Modelo/class_amigo.php");
                     $amigo=new Amigo();
-                    $resultadosBusqueda=$amigo->buscarAmigo($busqueda);
+                    $resultadosBusqueda=$amigo->buscarAmigo($_SESSION["id"],$busqueda);
                     require_once("../Vista/cabecera.php");
                     require_once("../Vista/buscador_amigos.php");
                     require_once("../Vista/pie.html");
