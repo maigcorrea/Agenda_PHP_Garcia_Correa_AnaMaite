@@ -265,6 +265,7 @@
                     require_once("../Modelo/class_amigo.php");
                     $amigo=new Amigo();
                     $resultadosBusqueda=$amigo->buscarAmigo($_SESSION["id"],$busqueda);
+                    $mostrar=true;
                     require_once("../Vista/cabecera.php");
                     require_once("../Vista/buscador_amigos.php");
                     require_once("../Vista/pie.html");

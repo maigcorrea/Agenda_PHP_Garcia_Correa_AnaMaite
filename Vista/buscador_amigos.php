@@ -12,7 +12,7 @@
 
     <?php
     //Se comprueba si se ha enviado el formulario, si es así, si hat resultados compatibles con la búsqueda se muestran, sino, aparece un mensaje
-
+    if (isset($_POST['action'])) {
             if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
                 echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th></tr>";
                 
@@ -24,6 +24,7 @@
             }else if(empty($resultadosBusqueda)){
                 echo "No hay resultados compatibles con tu búsqueda";
             }
+    }
 
             if(isset($msj)){
                 echo $msj;
