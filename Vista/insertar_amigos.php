@@ -36,7 +36,7 @@
         ?>
 
         <!-- Cambiar botón en función de si es admin o usuario, y si es usuario cambiar el botón si se le pasa por la url el valor del nombre del amigo a modificar o no -->
-        <input type="submit" value="<?php if(strcmp($tipo,"usuario") == 0){if(isset($_GET["nombre"])){echo "Modificar amigo";}else{echo "Enviar";}} else {if(isset($_GET["id"])){echo "Modificar amigo";}else{echo "Enviar";}}?>" name="action">
+        <input type="submit" value="<?php if(strcmp($tipo,"usuario") == 0){if(isset($_GET["id"])){echo "Modificar amigo";}else{echo "Enviar";}} else {if(isset($_GET["id"])){echo "Modificar amigo";}else{echo "Enviar";}}?>" name="action">
     </form>
     <?php
         if(isset($mensaje)) echo "<p>$mensaje</p>";

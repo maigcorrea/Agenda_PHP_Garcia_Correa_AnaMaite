@@ -199,8 +199,7 @@
         //Si el tipo es usuario, el usuario al que se le inserta el amigo es a ese usuario identificado, si es admin, se elige al usuario al que se quiere insertar el amigo
         if(strcmp($tipo,"usuario") == 0){
             //Antes de insertar hay que comprobar que la fecha no sea futura
-            $si=comprobarFechas($_POST["nac"]);
-            if($si){
+            if(comprobarFechas($_POST["nac"])){
                 if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
                     //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
                     //Falta mostrar el mensaje
@@ -212,17 +211,26 @@
                 }
             }else{
                 //Mensaje de que la fecha es incorrecta al ser futura
+                //NO SE MUESTRA EL MENSAJE
                 $mensaje="La fecha es incorrecta";
                 vistaInsertAmigos();
             }
         }else{
-            if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["duenio"])){
-                //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
-                //Falta mostrar el mensaje
-                irVistaAmigos();
+            //Antes de insertar hay que comprobar que la fecha no sea futura
+            if(comprobarFechas($_POST["nac"])){
+                if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["duenio"])){
+                    //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
+                    //Falta mostrar el mensaje
+                    irVistaAmigos();
+                }else{
+                    //Si no se ha insertado correctamente mostrar un mensaje
+                    $mensaje="Error. No se ha podido realizar la inserción";
+                    vistaInsertAmigos();
+                }
             }else{
-                //Si no se ha insertado correctamente mostrar un mensaje
-                $mensaje="Error. No se ha podido realizar la inserción";
+                //Mensaje de que la fecha es incorrecta al ser futura
+                //NO SE MUESTRA EL MENSAJE
+                $mensaje="La fecha es incorrecta";
                 vistaInsertAmigos();
             }
         }
@@ -230,7 +238,6 @@
     }
 
 
-    //  NO MODIFICA AL AMIGO, NO HACE EL UPDATE, HACE UN INSERT POR LA CARA
     function modificarAmigo(){
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
