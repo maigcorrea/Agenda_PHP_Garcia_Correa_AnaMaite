@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2025 a las 12:35:50
+-- Tiempo de generación: 06-02-2025 a las 16:33:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,9 +40,18 @@ CREATE TABLE `amigo` (
 --
 
 INSERT INTO `amigo` (`id`, `nombre`, `apellidos`, `f_nac`, `usuario`) VALUES
-(1, 'Pacho', 'Rodríguez', '2002-01-15', 1),
-(2, 'Manu', 'Castillo', '2004-05-09', 4),
-(3, 'Jaled', 'no se', '2001-09-12', 1);
+(1, 'Pachito', 'Rodrï¿½guez', '2002-01-15', 2),
+(2, 'Manuel', 'Castillo', '2004-05-09', 4),
+(3, 'Jaled', 'no se', '2001-09-12', 2),
+(4, 'asfd', 'crfeg', '2025-01-16', 1),
+(5, 't45t', 'gers5t', '2025-01-08', 1),
+(6, 'Juande', 'no me acuerdo', '2025-01-08', 1),
+(19, 'Manu', 'Romero', '2025-01-01', 1),
+(20, 'Dani', 'MartÃ­n', '2025-01-02', 3),
+(21, 'Dani', 'MartÃ­n', '2025-01-02', 3),
+(22, 'Dani', 'MartÃ­n', '2025-01-02', 3),
+(23, 'Ale', 'cdrswgf', '2025-01-17', 1),
+(24, 't45t', 'gers5t', '2025-02-06', 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +64,7 @@ CREATE TABLE `juego` (
   `titulo` varchar(100) NOT NULL,
   `plataforma` varchar(100) NOT NULL,
   `lanzamiento` int(4) NOT NULL,
-  `img` varchar(250) NOT NULL,
+  `img` varchar(450) NOT NULL,
   `usuario` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -64,9 +73,10 @@ CREATE TABLE `juego` (
 --
 
 INSERT INTO `juego` (`id`, `titulo`, `plataforma`, `lanzamiento`, `img`, `usuario`) VALUES
-(1, 'Fornite', 'PC', 2017, 'luego', 1),
+(1, 'Goat Simulator', 'PC', 2018, '../img/Erica/202211181651421_1.jpg', 1),
 (2, 'MineCraft', 'PC', 2009, 'luego', 4),
-(3, 'WOW', 'PC', 2004, 'luego', 1);
+(3, 'WOW', 'PC', 2004, '../img/Erica/wallpaper_world_of_warcraft_wrath_of_the_lich_king_classic_01_1920x1080.jpg', 1),
+(5, 'Fortnite1', 'PC', 2025, '../img/Erica/2x1_Fortnite_Generic_image1600w.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -88,8 +98,14 @@ CREATE TABLE `prestamo` (
 --
 
 INSERT INTO `prestamo` (`id`, `usuario`, `amigo`, `juego`, `f_prestamo`, `devuelto`) VALUES
-(1, 1, 1, 1, '2025-01-01', 0),
-(2, 1, 3, 3, '2025-01-08', 1);
+(1, 1, 1, 1, '2025-01-01', 1),
+(2, 1, 3, 3, '2025-01-08', 1),
+(3, 1, 1, 3, '2025-01-14', 1),
+(4, 1, 1, 3, '2025-01-21', 1),
+(5, 1, 3, 1, '2025-01-08', 1),
+(6, 1, 6, 3, '2025-01-21', 0),
+(7, 1, 4, 3, '2025-01-28', 0),
+(8, 1, 4, 3, '2020-03-04', 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +116,7 @@ INSERT INTO `prestamo` (`id`, `usuario`, `amigo`, `juego`, `f_prestamo`, `devuel
 CREATE TABLE `usuario` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `contraseña` varchar(20) NOT NULL,
+  `contrasenia` varchar(20) NOT NULL,
   `tipo` set('admin','usuario') NOT NULL DEFAULT 'usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -108,11 +124,17 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `contraseña`, `tipo`) VALUES
+INSERT INTO `usuario` (`id`, `nombre`, `contrasenia`, `tipo`) VALUES
 (1, 'Erica', 'hola123', 'usuario'),
 (2, 'Maite', 'hola123', 'usuario'),
 (3, 'Redu', 'hola123', 'usuario'),
-(4, 'Fran', 'hola123', 'usuario');
+(4, 'Fran', 'Morales', 'usuario'),
+(5, 'admin', 'admin', 'admin'),
+(10, 'Pepa Pig', 'holaMundo', 'usuario'),
+(11, 'ayuda', 'hola', 'usuario'),
+(12, '0', 'puto', 'usuario'),
+(13, 'hola', 'puto', 'usuario'),
+(14, 'hola', 'puto', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -159,25 +181,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `amigo`
 --
 ALTER TABLE `amigo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `juego`
 --
 ALTER TABLE `juego`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
