@@ -224,14 +224,18 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
+        //Si el tipo de usuario es usuario, se redirige al buscador de amigos, si es admin, se redirige al buscador de amigos del administrador
         if(strcmp($tipo,"usuario")==0){
             require_once("../Vista/cabecera.php");
             require_once("../Vista/buscador_amigos.php");
             require_once("../Vista/pie.html");
         }else{
-
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/buscador_usuarios.php");
+            require_once("../Vista/pie.html");
         }
     }
+
 
 
     function buscar(){
@@ -259,35 +263,50 @@
             //     require_once("../Modelo/class_juego.php");
             //     $juego=new Juego();
             // }
+            if($tipo==="usuario"){
+                
+                switch ($_POST["tipoBusq"]) {
+                    case 'amigos':
+                        require_once("../Modelo/class_amigo.php");
+                        $amigo=new Amigo();
+                        $resultadosBusqueda=$amigo->buscarAmigo($_SESSION["id"],$busqueda);
+                        $mostrar=true;
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_amigos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                    
+                    case 'juegos':
+                        require_once("../Modelo/class_juego.php");
+                        $juego=new Juego();
+                        $resultadosBusqueda=$juego->buscarJuego($busqueda);
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_juegos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                    
+                    case 'prestamos':
+                        require_once("../Modelo/class_prestamo.php");
+                        $prestamo=new Prestamo();
+                        $resultadosBusqueda=$prestamo->buscarPrestamo($busqueda);
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_prestamos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                }
 
-            switch ($_POST["tipoBusq"]) {
-                case 'amigos':
-                    require_once("../Modelo/class_amigo.php");
-                    $amigo=new Amigo();
-                    $resultadosBusqueda=$amigo->buscarAmigo($_SESSION["id"],$busqueda);
-                    $mostrar=true;
-                    require_once("../Vista/cabecera.php");
-                    require_once("../Vista/buscador_amigos.php");
-                    require_once("../Vista/pie.html");
-                    break;
-                
-                case 'juegos':
-                    require_once("../Modelo/class_juego.php");
-                    $juego=new Juego();
-                    $resultadosBusqueda=$juego->buscarJuego($busqueda);
-                    require_once("../Vista/cabecera.php");
-                    require_once("../Vista/buscador_juegos.php");
-                    require_once("../Vista/pie.html");
-                    break;
-                
-                case 'prestamos':
-                    require_once("../Modelo/class_prestamo.php");
-                    $prestamo=new Prestamo();
-                    $resultadosBusqueda=$prestamo->buscarPrestamo($busqueda);
-                    require_once("../Vista/cabecera.php");
-                    require_once("../Vista/buscador_prestamos.php");
-                    require_once("../Vista/pie.html");
-                    break;
+            }else if($tipo==="admin"){
+                switch ($_POST["tipoBusq"]) {
+                    case 'amigos':
+                        require_once("../Modelo/class_amigo.php");
+                        $amigo=new Amigo();
+                        $resultadosBusqueda=$amigo->buscarUsuario($busqueda);
+                        $mostrar=true;
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_usuarios.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                }
             }
             
         }else{
