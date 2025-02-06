@@ -15,7 +15,7 @@
             echo "<table><tr><th>Juego</th><th>Título</th><th>Plataforma</th><th>Año de lanzamiento</th></tr>";
             
             foreach ($resultadosBusqueda as $key => $value) {
-                echo "<tr><td><img src='".$value[0]."'/></td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td></tr>";
+                echo "<tr><td><img src='".$value[0]."'/></td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td><a href='../Controlador/index_usuarios.php?action=insertarjuego&id=".urldecode($key)."'>Modificar</a></tr>";
             }
 
             echo "</table>";
