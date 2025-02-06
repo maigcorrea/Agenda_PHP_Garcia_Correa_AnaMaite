@@ -231,7 +231,7 @@
             require_once("../Vista/pie.html");
         }else{
             require_once("../Vista/cabecera.php");
-            require_once("../Vista/buscador_usuarios.php");
+            require_once("../Vista/buscador_contactos.php");
             require_once("../Vista/pie.html");
         }
     }
@@ -303,7 +303,7 @@
                         $resultadosBusqueda=$amigo->buscarUsuario($busqueda);
                         $mostrar=true;
                         require_once("../Vista/cabecera.php");
-                        require_once("../Vista/buscador_usuarios.php");
+                        require_once("../Vista/buscador_contactos.php");
                         require_once("../Vista/pie.html");
                         break;
                 }
