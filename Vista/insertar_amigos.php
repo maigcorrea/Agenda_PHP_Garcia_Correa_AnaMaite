@@ -13,6 +13,7 @@
         <input type="text" name="nombre" value="<?php if(isset($datos[0])) echo $datos[0];?>" ><br>
         <label for="ape">Apellidos</label><br>
         <input type="text" name="ape" value="<?php if(isset($datos[1])) echo $datos[1];?>" ><br>
+        <!-- Al enviar el formulario hay que comprobar que la fecha no sea futura -->
         <label for="nac">Fecha Nacimiento</label><br>
         <input type="date" name="nac" value="<?php if(isset($datos[2])) echo $datos[2];?>" ><br>
         <!-- Añadir un campo más en caso de que el usuario sea administrador -->
@@ -38,6 +39,6 @@
         <input type="submit" value="<?php if(strcmp($tipo,"usuario") == 0){if(isset($_GET["nombre"])){echo "Modificar amigo";}else{echo "Enviar";}} else {if(isset($_GET["id"])){echo "Modificar amigo";}else{echo "Enviar";}}?>" name="action">
     </form>
     <?php
-        if(isset($mensaje)) echo "<p>$mensaje</p>";
+        if(isset($mensaje)) echo $mensaje;
     ?>
 </body>

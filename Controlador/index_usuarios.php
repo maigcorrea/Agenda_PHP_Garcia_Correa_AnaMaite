@@ -1,5 +1,19 @@
 <?php
 
+    function comprobarFechas($fecha){
+        $fechaActual=date("Y-m-d");
+        $segundosActuales=strtotime($fechaActual);
+
+        $segundosFecha=strtotime($fecha);
+
+        $fechaCorrecta=false;
+        if($segundosFecha <= $segundosActuales){
+            $fechaCorrecta = true;
+        }
+
+        return $fechaCorrecta;
+    }
+
     //USUARIOS
     //Iniciar Sesión
     function iniciar(){
@@ -184,13 +198,21 @@
 
         //Si el tipo es usuario, el usuario al que se le inserta el amigo es a ese usuario identificado, si es admin, se elige al usuario al que se quiere insertar el amigo
         if(strcmp($tipo,"usuario") == 0){
-            if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
-                //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
-                //Falta mostrar el mensaje
-                irVistaAmigos();
+            //Antes de insertar hay que comprobar que la fecha no sea futura
+            $si=comprobarFechas($_POST["nac"]);
+            if($si){
+                if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
+                    //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
+                    //Falta mostrar el mensaje
+                    irVistaAmigos();
+                }else{
+                    //Si no se ha insertado correctamente mostrar un mensaje
+                    $mensaje="<p>Error. No se ha podido realizar la inserción</p>";
+                    vistaInsertAmigos();
+                }
             }else{
-                //Si no se ha insertado correctamente mostrar un mensaje
-                $mensaje="Error. No se ha podido realizar la inserción";
+                //Mensaje de que la fecha es incorrecta al ser futura
+                $mensaje="<p>La fecha es incorrecta</p>";
                 vistaInsertAmigos();
             }
         }else{
