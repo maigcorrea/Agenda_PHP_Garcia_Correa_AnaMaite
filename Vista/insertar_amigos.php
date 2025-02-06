@@ -39,6 +39,6 @@
         <input type="submit" value="<?php if(strcmp($tipo,"usuario") == 0){if(isset($_GET["nombre"])){echo "Modificar amigo";}else{echo "Enviar";}} else {if(isset($_GET["id"])){echo "Modificar amigo";}else{echo "Enviar";}}?>" name="action">
     </form>
     <?php
-        if(isset($mensaje)) echo $mensaje;
+        if(isset($mensaje)) echo "<p>$mensaje</p>";
     ?>
 </body>

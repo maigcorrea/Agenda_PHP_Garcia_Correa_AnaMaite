@@ -33,7 +33,7 @@
 
             echo "</table>";
         }else{
-            echo "No hay resultados compatibles con tu búsqueda";
+            echo "<p>No hay resultados compatibles con tu búsqueda</p>";
         }
     }
 

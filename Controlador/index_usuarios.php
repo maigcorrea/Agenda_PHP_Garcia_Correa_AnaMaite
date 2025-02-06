@@ -212,7 +212,7 @@
                 }
             }else{
                 //Mensaje de que la fecha es incorrecta al ser futura
-                $mensaje="<p>La fecha es incorrecta</p>";
+                $mensaje="La fecha es incorrecta";
                 vistaInsertAmigos();
             }
         }else{
