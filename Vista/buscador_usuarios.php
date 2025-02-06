@@ -19,6 +19,7 @@ if (isset($_POST['busqueda'])) {
             //Pasar la contraseña a asteriscos
             $long=strlen($value[2]);
             $ast=str_repeat("*",$long);
+            //Me falta meter lo de modificar, que también hay que hacerlo
             echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$ast</td></tr>";
         }
 
