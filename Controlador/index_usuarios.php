@@ -148,7 +148,7 @@
         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
         $tipo=$_SESSION['tipo'];
 
-        //Si el tipo es admin, sacar un array con los nombres de los usuarios
+        //Si el tipo es admin, sacar un array con los nombres de los usuarios dueños
         if(strcmp($tipo,"admin")==0){
             require_once("../Modelo/class_user.php");
             $usuario=new Usuario();
@@ -163,7 +163,9 @@
             $datos=$amigo->ObtenerAmigoSegunId($_GET["id"]);
 
             //Para rellenar el campo select del Dueño, se saca el dueño actual
-            $duenio=$amigo->encontrarDuenio($_GET["id"]);
+            if(strcmp($tipo,"admin")==0){
+                $duenio=$amigo->encontrarDuenio($_GET["id"]);
+            }
         }
 
         require_once("../Vista/cabecera.php");
