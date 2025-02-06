@@ -1,5 +1,5 @@
 <body>
-<h1>Buscar Amigo</h1>
+<h1>Buscar Contacto</h1>
 
     <form action="" method="post">
         <label for="busqueda">Nombre / Apellidos del amigo</label><br>

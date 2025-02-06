@@ -168,6 +168,25 @@
             return $modificado;
         }
 
+
+        public function buscarUsuario($busqueda){
+            $sentencia="SELECT id, nombre, contrasenia FROM usuario WHERE nombre LIKE ?";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $param=$busqueda."%";
+            $consulta->bind_param("s", $param);
+            $consulta->bind_result($id,$nom,$contra);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[]=[$id,$nom,$contra];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
         
     }
 ?>

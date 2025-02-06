@@ -121,6 +121,24 @@
     }
 
 
+    //Función para redirigir a la vista de usuarios
+    function vistaBuscarUsuarios(){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+        if(strcmp($tipo,"admin")==0){
+            require_once("../Vista/cabecera.php");
+            require_once("../Vista/buscador_usuarios.php");
+            require_once("../Vista/pie.html");
+        }else{
+
+        }
+    }
+
+
     //AMIGOS
     function vistaInsertAmigos(){
 
@@ -270,7 +288,6 @@
                         require_once("../Modelo/class_amigo.php");
                         $amigo=new Amigo();
                         $resultadosBusqueda=$amigo->buscarAmigo($_SESSION["id"],$busqueda);
-                        $mostrar=true;
                         require_once("../Vista/cabecera.php");
                         require_once("../Vista/buscador_amigos.php");
                         require_once("../Vista/pie.html");
@@ -300,10 +317,18 @@
                     case 'amigos':
                         require_once("../Modelo/class_amigo.php");
                         $amigo=new Amigo();
-                        $resultadosBusqueda=$amigo->buscarUsuario($busqueda);
-                        $mostrar=true;
+                        $resultadosBusqueda=$amigo->buscarContacto($busqueda);
                         require_once("../Vista/cabecera.php");
                         require_once("../Vista/buscador_contactos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+
+                    case 'usuarios':
+                        require_once("../Modelo/class_user.php");
+                        $usuario=new Usuario();
+                        $resultadosBusqueda=$usuario->buscarUsuario($busqueda);
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_usuarios.php");
                         require_once("../Vista/pie.html");
                         break;
                 }
@@ -677,6 +702,7 @@
         if($action=="buscarprestamos") $action="vistaBuscarPrestamos";
         if($action=="buscarjuegos") $action="vistaBuscarJuegos";
         if($action=="buscaramigos") $action="vistaBuscarAmigos";
+        if($action=="buscarusuarios") $action="vistaBuscarUsuarios";
         
 
         $action();
