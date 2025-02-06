@@ -180,7 +180,7 @@
 
             $datos=[];
             while($consulta->fetch()){
-                $datos[]=[$id,$nom,$contra];
+                $datos[$id]=[$nom,$contra];
             }
 
             $consulta->close();

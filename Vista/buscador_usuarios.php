@@ -17,10 +17,10 @@ if (isset($_POST['busqueda'])) {
         
         foreach ($resultadosBusqueda as $key => $value) {
             //Pasar la contraseña a asteriscos
-            $long=strlen($value[2]);
+            $long=strlen($value[1]);
             $ast=str_repeat("*",$long);
             //Me falta meter lo de modificar, que también hay que hacerlo
-            echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$ast</td></tr>";
+            echo "<tr><td>$key</td><td>$value[0]</td><td>$ast</td><td><a href='../Controlador/index_usuarios.php?action=Insertar usuarios&id=".urldecode($key)."'>Modificar</a></td></tr>";
         }
 
         echo "</table>";
