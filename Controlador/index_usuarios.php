@@ -205,6 +205,8 @@
         
     }
 
+
+    //  NO MODIFICA AL AMIGO, NO HACE EL UPDATE, HACE UN INSERT POR LA CARA
     function modificarAmigo(){
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
