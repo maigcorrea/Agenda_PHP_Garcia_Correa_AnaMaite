@@ -435,22 +435,27 @@
 
 
     function insertarJuego(){  
+        //Antes de insertar hay que comprobar que la fecha no sea futura
+        //AQUI
+        if(comprobarFechas($_POST["nac"])){
+            //Guardar la imagen en una carpeta para que luego se pueda subir esa ruta a la bd a la hora de insertar
+            $destino=guardarImg();
 
-        //Guardar la imagen en una carpeta para que luego se pueda subir esa ruta a la bd a la hora de insertar
-        $destino=guardarImg();
+            require_once("../Modelo/class_juego.php");
+            $juego=new Juego();
+            $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$destino,$_SESSION["id"]); //Aquí van los datos del formulario
 
-        require_once("../Modelo/class_juego.php");
-        $juego=new Juego();
-        $insertado=$juego->insertar_Juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$destino,$_SESSION["id"]); //Aquí van los datos del formulario
-
-        //Si se inserta, redireccionar a la vista de juegos
-        if($insertado){
-            echo "Insertado";
-            //Vista de juegos y mensaje de que se ha insertado correctamente
-            
+            //Si se inserta, redireccionar a la vista de juegos
+            if($insertado){
+                echo "Insertado";
+                //Vista de juegos y mensaje de que se ha insertado correctamente
+                
+            }else{
+                echo "Mal";
+                //Misma vista y mensaje de error
+            }
         }else{
-            echo "Mal";
-            //Misma vista y mensaje de error
+
         }
     }
 
