@@ -16,7 +16,7 @@
             echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th><th>Dueño</th></tr>";
             
             foreach ($resultadosBusqueda as $key => $value) {
-                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td></tr>";
+                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
             }
 
             echo "</table>";

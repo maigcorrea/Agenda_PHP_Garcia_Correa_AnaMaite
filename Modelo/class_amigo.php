@@ -163,17 +163,17 @@
         }
 
         public function buscarContacto($busqueda){
-            $sentencia="SELECT amigo.nombre, apellidos, f_nac, usuario.nombre FROM amigo,usuario WHERE (amigo.nombre LIKE ? OR apellidos LIKE ?) AND amigo.usuario=usuario.id;";
+            $sentencia="SELECT amigo.id, amigo.nombre, apellidos, f_nac, usuario.nombre FROM amigo,usuario WHERE (amigo.nombre LIKE ? OR apellidos LIKE ?) AND amigo.usuario=usuario.id;";
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $param=$busqueda."%";
             $consulta->bind_param("ss", $param, $param);
-            $consulta->bind_result($nom,$ape,$f_nac,$usuario);
+            $consulta->bind_result($id, $nom,$ape,$f_nac,$usuario);
 
             $consulta->execute();
 
             $datos=[];
             while($consulta->fetch()){
-                $datos[]=[$nom,$ape,$f_nac,$usuario];
+                $datos[$id]=[$nom,$ape,$f_nac,$usuario];
             }
 
             $consulta->close();
