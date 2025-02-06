@@ -10,6 +10,7 @@
     </form>
 
     <?php
+    if (isset($_POST['busqueda'])) {
         if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
             echo "<table><tr><th>Usuario</th><th>Amigo</th><th>Juego</th><th>Fecha</th><th>Devuelto</th></tr>";
             
@@ -28,6 +29,7 @@
         }else{
             echo "No hay resultados compatibles con tu búsqueda";
         }
+    }
 
         if(isset($msj)){
             echo $msj;

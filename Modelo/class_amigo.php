@@ -145,10 +145,10 @@
 
 
         public function buscarAmigo($idUsuario, $busqueda){
-            $sentencia="SELECT nombre, apellidos, f_nac FROM amigo WHERE nombre LIKE ? OR apellidos LIKE ? AND usuario=?;";
+            $sentencia="SELECT nombre, apellidos, f_nac FROM amigo WHERE (nombre LIKE ? OR apellidos LIKE ?) AND usuario=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $param=$busqueda."%";
-            $consulta->bind_param("sss", $param, $param, $idUsuario);
+            $consulta->bind_param("ssi", $param, $param, $idUsuario);
             $consulta->bind_result($nom,$ape,$f_nac);
 
             $consulta->execute();
