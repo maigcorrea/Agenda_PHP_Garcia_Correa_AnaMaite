@@ -70,7 +70,7 @@
 
 
         public function buscarPrestamo($busqueda){
-            $sentencia="SELECT usuario.nombre, amigo.nombre, juego.titulo, prestamo.f_prestamo, prestamo.devuelto
+            $sentencia="SELECT usuario.nombre, amigo.nombre, juego.titulo, prestamo.f_prestamo, prestamo.devuelto, prestamo.id
                         FROM prestamo
                         JOIN usuario ON prestamo.usuario = usuario.id
                         JOIN amigo ON prestamo.amigo = amigo.id
@@ -80,13 +80,13 @@
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $param=$busqueda."%";
             $consulta->bind_param("ss", $param, $param);
-            $consulta->bind_result($usu, $amigo, $juego, $f_pres, $dev);
+            $consulta->bind_result($usu, $amigo, $juego, $f_pres, $dev, $id);
 
             $consulta->execute();
 
             $datos=[];
             while($consulta->fetch()){
-                $datos[]=[$usu, $amigo, $juego, $f_pres, $dev];
+                $datos[$id]=[$usu, $amigo, $juego, $f_pres, $dev];
             }
 
             $consulta->close();

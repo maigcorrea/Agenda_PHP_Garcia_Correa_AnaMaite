@@ -23,7 +23,13 @@
                 }
                 
                 echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td>$disponible</td></tr>";
+                echo "<td><a href='"."../Controlador/index_usuarios.php?action=devolverPrestamo&id=". $key ."'";
+                if($value[4]==1) echo "onclick='return false'";
+                echo ">Devolver</a></td></tr>";
             }
+
+            
+        
 
             echo "</table>";
         }else{
