@@ -25,7 +25,7 @@
             ?>
         </select><br>
         <label for="dia">Dia</label><br>
-        <input type="date" name="dia"><br>
+        <input type="date" name="dia" min="<?php echo date("Y-m-d",time()-86400*3) ?>" max="<?php echo date("Y-m-d",time()+86400*3) ?>"><br>
         <?php
             if(isset($mensaje)) echo "<p>$mensaje</p>";
         ?>

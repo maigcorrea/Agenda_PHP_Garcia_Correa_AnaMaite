@@ -15,11 +15,13 @@
 
     function comprobarFechasPasadas($fecha){
         $segundosActuales=time();
+        $segTresDias=86400*3;
 
-        $segundosFecha=strtotime($fecha);
+        $segundosLimitePasado=$segundosActuales-$segTresDias;
+        $segundosLimiteFuturo=$segundosActuales+$segTresDias;
 
         $fechaCorrecta=false;
-        if($segundosFecha >= $segundosActuales){
+        if(strtotime($fecha) >= $segundosLimitePasado && strtotime($fecha) <= $segundosLimiteFuturo){
             $fechaCorrecta = true;
         }
 
@@ -631,7 +633,7 @@
         $prestamo=new Prestamo();
 
         //Antes de insertar el préstamo hay que comprobar que la fecha no sea PASADA
-        if(comprobarFechasPasadas($_POST["dia"])){
+        // if(comprobarFechasPasadas($_POST["dia"])){
             $insertado=$prestamo->insertar_prestamo($_SESSION["id"],$_POST["amigos"],$_POST["juegos"],$_POST["dia"]);
 
             if($insertado){
@@ -640,11 +642,11 @@
             }else{
                 //Mensaje de error en la misma página o en la de préstamos? Preguntar a Érica a ella que le parece mejor
             }
-        }else{
-            //CONTROLAR SOLO UNOS DIAS EN PASADO
-            $mensaje="La fecha no puede ser pasada";
-            verInsertarPrestamo($mensaje);
-        }
+        // }else{
+        //     //CONTROLAR SOLO UNOS DIAS EN PASADO
+        //     $mensaje="La fecha no puede ser pasada";
+        //     verInsertarPrestamo($mensaje);
+        // }
     }
 
 
