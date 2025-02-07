@@ -1,13 +1,25 @@
 <?php
 
     function comprobarFechas($fecha){
-        $fechaActual=date("Y-m-d");
-        $segundosActuales=strtotime($fechaActual);
+        $segundosActuales=time();
 
         $segundosFecha=strtotime($fecha);
 
         $fechaCorrecta=false;
         if($segundosFecha <= $segundosActuales){
+            $fechaCorrecta = true;
+        }
+
+        return $fechaCorrecta;
+    }
+
+    function comprobarFechasPasadas($fecha){
+        $segundosActuales=time();
+
+        $segundosFecha=strtotime($fecha);
+
+        $fechaCorrecta=false;
+        if($segundosFecha >= $segundosActuales){
             $fechaCorrecta = true;
         }
 
@@ -154,7 +166,7 @@
 
 
     //AMIGOS
-    function vistaInsertAmigos(){
+    function vistaInsertAmigos(String $mensaje=null, $idUsu=null){
 
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
@@ -170,15 +182,21 @@
         }
 
         //Para rellenar los campos del formulario si es modificar, es decir, si se le pasa por la url el id del amigo
-        if(isset($_GET['id'])){
+        //Como se comprueba si la fecha es correcta, si no lo es, se tiene que recargar la página, por lo que se le tiene que volver a pasar por parámetro el id del usuario a modificar, para eso, si el PARÁMETRO $idUsu es diferente a null, significa que ha entrado de nuevo en modificar, y en función del id que exista, si del que se ha pasado por la url o el que se ha pasado por parámetro, se asigna a una variable para luego obtener los datos
+        //IMPORTANTE, como primero se le pasa por url el dato del id de usuario y luego por parámetro, hay que hacer un request para que lo pille de ambas maneras
+        if(isset($_REQUEST["idAmigo"])){
+
+            $id=$_REQUEST["idAmigo"];
+        
+            
             require_once("../Modelo/class_amigo.php");
             $amigo=new Amigo();
             
-            $datos=$amigo->ObtenerAmigoSegunId($_GET["id"]);
+            $datos=$amigo->ObtenerAmigoSegunId($id);
 
-            //Para rellenar el campo select del Dueño, se saca el dueño actual
+            // Para rellenar el campo select del Dueño, se saca el dueño actual
             if(strcmp($tipo,"admin")==0){
-                $duenio=$amigo->encontrarDuenio($_GET["id"]);
+                $duenio=$amigo->encontrarDuenio($id);
             }
         }
 
@@ -213,7 +231,7 @@
                 //Mensaje de que la fecha es incorrecta al ser futura
                 //NO SE MUESTRA EL MENSAJE
                 $mensaje="La fecha es incorrecta";
-                vistaInsertAmigos();
+                vistaInsertAmigos($mensaje);
             }
         }else{
             //Antes de insertar hay que comprobar que la fecha no sea futura
@@ -225,13 +243,13 @@
                 }else{
                     //Si no se ha insertado correctamente mostrar un mensaje
                     $mensaje="Error. No se ha podido realizar la inserción";
-                    vistaInsertAmigos();
+                    vistaInsertAmigos($mensaje);
                 }
             }else{
                 //Mensaje de que la fecha es incorrecta al ser futura
                 //NO SE MUESTRA EL MENSAJE
                 $mensaje="La fecha es incorrecta";
-                vistaInsertAmigos();
+                vistaInsertAmigos($mensaje);
             }
         }
         
@@ -248,21 +266,34 @@
 
         //Si el tipo es usuario se modifica sin indicarle el dueño, si es admin hay que indicarle el dueño
         if(strcmp($tipo,"usuario")==0){
-            $modificado=$amigo->modificar_amigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["idAmigo"]);
-            if($modificado){
-                //Redirigir al menu de amigos y mostrar toast de Exito
-                irVistaAmigos();
+            //Antes de modificar hay que comprobar que las fechas no sean futuras
+            if(comprobarFechas($_POST["nac"])){
+                $modificado=$amigo->modificar_amigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["idAmigo"]);
+                if($modificado){
+                    //Redirigir al menu de amigos y mostrar toast de Exito
+                    irVistaAmigos();
+                }else{
+                    //Mostrar mensaje de error
+                }
             }else{
-                //Mostrar mensaje de error
+                $mensaje="La fecha no puede ser futura";
+                //Hay que indicar el id del usuario a modificar, porque se pierde?
+                vistaInsertAmigos($mensaje, $_POST["idAmigo"]);
             }
         }else{
-            $modificado=$amigo->modificarAmigoAdmin($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["duenio"],$_POST["idAmigo"]);
-            if($modificado){
-                //Redirigir al menu de amigos y mostrar toast de Exito
-                irVistaAmigos();
+            //Antes de modificar hay que comprobar que las fechas no sean futuras
+            if(comprobarFechas($_POST["nac"])){
+                $modificado=$amigo->modificarAmigoAdmin($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_POST["duenio"],$_POST["idAmigo"]);
+                if($modificado){
+                    //Redirigir al menu de amigos y mostrar toast de Exito
+                    irVistaAmigos();
+                }else{
+                    //Mostrar mensaje de error
+                    echo "Error";
+                }
             }else{
-                //Mostrar mensaje de error
-                echo "Error";
+                $mensaje="La fecha no puede ser futura";
+                vistaInsertAmigos($mensaje, $_POST["idAmigo"]);
             }
         }
     }
@@ -566,7 +597,7 @@
     }
 
 
-    function verInsertarPrestamo(){
+    function verInsertarPrestamo(String $mensaje=null){
         //Cargar los datos antes de redirigir a la vista
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
@@ -599,13 +630,20 @@
         require_once("../Modelo/class_prestamo.php");
         $prestamo=new Prestamo();
 
-        $insertado=$prestamo->insertar_prestamo($_SESSION["id"],$_POST["amigos"],$_POST["juegos"],$_POST["dia"]);
+        //Antes de insertar el préstamo hay que comprobar que la fecha no sea PASADA
+        if(comprobarFechasPasadas($_POST["dia"])){
+            $insertado=$prestamo->insertar_prestamo($_SESSION["id"],$_POST["amigos"],$_POST["juegos"],$_POST["dia"]);
 
-        if($insertado){
-            //Redirigir a la página de préstamos y mostrar toast de Exito
-            vistaPrestamos();
+            if($insertado){
+                //Redirigir a la página de préstamos y mostrar toast de Exito
+                vistaPrestamos();
+            }else{
+                //Mensaje de error en la misma página o en la de préstamos? Preguntar a Érica a ella que le parece mejor
+            }
         }else{
-            //Mensaje de error en la misma página o en la de préstamos? Preguntar a Érica a ella que le parece mejor
+            //CONTROLAR SOLO UNOS DIAS EN PASADO
+            $mensaje="La fecha no puede ser pasada";
+            verInsertarPrestamo($mensaje);
         }
     }
 
@@ -642,9 +680,6 @@
 
 
     //ADMINISTRADOR
-    // function insertarContacto(){
-        
-    // }
 
     //Función para ir a la vista de usuarios desde el panel de admin
     function irVistaUsuarios(){
@@ -666,7 +701,7 @@
 
 
     //Función para redirigir a la vista de insertar usuarios
-    function insertarUsuarios(){
+    function insertarUsuarios(String $mensaje=null){
 
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
@@ -691,17 +726,18 @@
 
     //Función para insertar a un nuevo usuario
     function insertarUsuario(){
-        
+        //AQUI2
         require_once("../Modelo/class_user.php");
         $usuario=new Usuario();
-        $insertado=$usuario->insertar_usuario($_POST["nombre"],$_POST["contr"]);
-        if($insertado){
-            //Toast de éxito y redirigir al menu de usuarios
-            irVistaUsuarios();
-        }else{
-            //Mensaje de Error
-            echo "Error";
-        }
+       
+            $insertado=$usuario->insertar_usuario($_POST["nombre"],$_POST["contr"]);
+            if($insertado){
+                //Toast de éxito y redirigir al menu de usuarios
+                irVistaUsuarios();
+            }else{
+                //Mensaje de Error
+                echo "Error";
+            }
     }
 
 
@@ -709,15 +745,15 @@
     function modificarUsuario(){
         require_once("../Modelo/class_user.php");
         $usuario=new Usuario();
-        $modificado=$usuario->modificar_usuario($_POST["nombre"], $_POST["contr"], $_POST["idUsu"]);
-        if($modificado){
-            //Éxito y redirigir a la vista
-            irVistaUsuarios();
-        }else{
-            echo "Error";
-        }
 
-
+            $modificado=$usuario->modificar_usuario($_POST["nombre"], $_POST["contr"], $_POST["idUsu"]);
+            if($modificado){
+                //Éxito y redirigir a la vista
+                irVistaUsuarios();
+            }else{
+                //Mensaje de Error
+                echo "Error";
+            }
     }
 
 

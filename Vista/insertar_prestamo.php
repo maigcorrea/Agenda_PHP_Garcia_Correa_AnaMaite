@@ -1,5 +1,4 @@
 <body>
-    <!-- Cambiar título en función de si se le pasa por la url el valor del id del juego a modificar o no -->
     <h1>Insertar préstamo</h1>
 
     <form action="" method="post">
@@ -27,6 +26,9 @@
         </select><br>
         <label for="dia">Dia</label><br>
         <input type="date" name="dia"><br>
+        <?php
+            if(isset($mensaje)) echo "<p>$mensaje</p>";
+        ?>
 
         <input type="submit" value="Insertar" name="action">
     </form>

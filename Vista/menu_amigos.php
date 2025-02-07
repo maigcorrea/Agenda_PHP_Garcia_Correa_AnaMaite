@@ -27,7 +27,8 @@
 
                   if(isset($value[3]))echo $value[3];
 
-                  echo "</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
+                  //EN VEZ DE PASARLE LA URL SE LO PUEDO PASAR POR POST CON UN SUBMIT (INPUT HIDDEN) PARA ASÍ LUEGO NO USAR $_REQUEST EN vistaInsertarAmigos() en el controlador
+                  echo "</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&idAmigo=".urldecode($key)."'>Modificar</a></td></tr>";
                }
             }
          ?>
