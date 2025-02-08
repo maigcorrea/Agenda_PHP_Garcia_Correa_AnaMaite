@@ -8,7 +8,7 @@
      <!-- <link rel="stylesheet" href="./style.css"> -->
     <style>
         body{
-            background-color:red;
+            background-color:white;
         }
 
         img{

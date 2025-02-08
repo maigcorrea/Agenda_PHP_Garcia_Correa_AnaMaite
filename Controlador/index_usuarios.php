@@ -612,7 +612,7 @@
         $amigo=new Amigo();
         $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
 
-        //JUEGOS (Tendría que seleccionar los juegos que no están prestados, me cago en la puta)
+        //JUEGOS
         require_once("../Modelo/class_juego.php");
         $juego=new Juego();
         $datosJuegos=$juego->get_juegosDisp($_SESSION["id"]);

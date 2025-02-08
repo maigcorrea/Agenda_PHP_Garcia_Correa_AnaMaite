@@ -70,9 +70,20 @@
 
 // 0 que no se ha devuelto, 1, que se ha devuelto
         public function get_juegosDisp($usuario){
-            $sentencia="SELECT juego.id, juego.titulo, juego.plataforma FROM juego,prestamo WHERE juego.id=prestamo.juego AND prestamo.devuelto=1 AND prestamo.usuario=?;";
+            $sentencia="SELECT juego.id, juego.titulo, juego.plataforma
+                        FROM juego
+                        LEFT JOIN (
+                            SELECT p.juego, MAX(p.id) AS max_id
+                            FROM prestamo p
+                            WHERE p.usuario = ?  -- Filtramos los préstamos solo del usuario específico
+                            GROUP BY p.juego
+                        ) ultimos_prestamos ON juego.id = ultimos_prestamos.juego
+                        LEFT JOIN prestamo p_final ON ultimos_prestamos.max_id = p_final.id AND p_final.devuelto = 0
+                        WHERE p_final.id IS NULL
+                        AND juego.usuario = ?;  -- Filtramos los juegos cuyo dueño sea el usuario específico
+                        ";
             $consulta=$this->conn->getConection()->prepare($sentencia);
-            $consulta->bind_param("i",$usuario);
+            $consulta->bind_param("ii",$usuario,$usuario);
             $consulta->bind_result($id,$titulo,$plataforma);
 
             $consulta->execute();
