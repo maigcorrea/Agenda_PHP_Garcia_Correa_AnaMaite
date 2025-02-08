@@ -1,4 +1,4 @@
-<body>
+
     <h1>MENÚ AMIGOS</h1>
     <p>Bienvenid@ <?php if(isset($_SESSION["usu"])) echo $_SESSION["usu"]?></p>
       <?php echo $tipo?>
@@ -33,4 +33,10 @@
             }
          ?>
      </table>
+
+     <?php
+      if(isset($toast) && $toast!=null){
+         echo '';
+      }
+     ?>
 </body>

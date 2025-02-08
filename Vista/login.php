@@ -8,7 +8,7 @@
      <!-- <link rel="stylesheet" href="./style.css"> -->
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility,visibility_off" />
 </head>
-<body class="bg-[url(https://i.pinimg.com/736x/86/ed/e5/86ede5f8ebf2e67bd2827abed5b2e144.jpg)] bg-cover">
+<body class="bg-gray-500">
     <div class="flex justify-center items-center min-h-[90vh] font-mono">
         <div class="container w-full min-h-[90vh] flex justify-center items-center text-[45px] flex-wrap">
             <h1 class="w-full text-[75px] mb-[90px] border-b-2 border-green-700">AGENDA</h1>
@@ -19,7 +19,7 @@
                 <label for="contr" class="w-full">Introduce tu contraseña:</label><br>
                 <div class="password-field relative w-fit w-full ">
                     <input type="text" name="contr" class="border-b-2 w-full h-[60px] focus:outline-hidden hover:bg-green-700 hover:text-white pb-4" placeholder=">"><br>
-                    <i class="material-symbols-outlined eye absolute right-[10px] bottom-[0px] cursor-pointer fill-black w-fit h-fit z-10 pb-4"></i>
+                    <i class="material-symbols-outlined eye absolute right-[10px] bottom-[0px] cursor-pointer w-fit h-fit z-10 pb-4"></i>
                 </div>
         
                 <input type="checkbox" name="rec" value=1 class=""> Recordar<br>

@@ -8,11 +8,11 @@
     <!-- Establecer los datos del array para rellenar los campos automáticamente-->
     <!-- Utilizo htmlspecialchars como una medida de seguridad para evitar ataques de inyección de código, convierte los caracteres especiales de HTML en su representación segura -->
     <label for="tit">Titulo</label><br>
-    <input type="text" name="tit" value="<?php if(isset($datos[0])) echo $datos[0] ?>"><br>
+    <input type="text" name="tit" value="<?php if(isset($datos[0])) echo $datos[0] ?> " required><br>
     <label for="plat">Plataforma</label><br>
-    <input type="text" name="plat" value="<?php if(isset($datos[1])) echo $datos[1] ?>"><br>
+    <input type="text" name="plat" value="<?php if(isset($datos[1])) echo $datos[1] ?>" required><br>
     <label for="lanz">Año de lanzamiento</label><br>
-    <input type="number" name="lanz" value="<?php if(isset($datos[2])) echo $datos[2] ?>"><br>
+    <input type="number" name="lanz" value="<?php if(isset($datos[2])) echo $datos[2] ?>" max=<?php echo date("Y",time())?> required><br>
     <label for="img">Imagen:</label><br>
     <input type="file" name="img"><br>
 

@@ -106,7 +106,7 @@
     }
 
     //Función para redirigir a la vista de amigos
-    function irVistaAmigos(){
+    function irVistaAmigos($toast=null){
         //Mostrar amigos antes de redirigir
         require_once("../Modelo/cookies_sesiones.php");
         start_session();
@@ -222,12 +222,12 @@
             if(comprobarFechas($_POST["nac"])){
                 if($amigo->insertarAmigo($_POST["nombre"],$_POST["ape"],$_POST["nac"],$_SESSION["id"])){
                     //Si se ha insertado correctamente, mostrar mensaje y redirigir al menu de amigos
-                    //Falta mostrar el mensaje
-                    irVistaAmigos();
+                    $toast=true;
+                    irVistaAmigos($toast);
                 }else{
                     //Si no se ha insertado correctamente mostrar un mensaje
-                    $mensaje="<p>Error. No se ha podido realizar la inserción</p>";
-                    vistaInsertAmigos();
+                    $mensaje="Error. No se ha podido realizar la inserción";
+                    vistaInsertAmigos($mensaje);
                 }
             }else{
                 //Mensaje de que la fecha es incorrecta al ser futura
@@ -468,9 +468,6 @@
 
 
     function insertarJuego(){  
-        //Antes de insertar hay que comprobar que la fecha no sea futura
-        //AQUI
-        if(comprobarFechas($_POST["nac"])){
             //Guardar la imagen en una carpeta para que luego se pueda subir esa ruta a la bd a la hora de insertar
             $destino=guardarImg();
 
@@ -487,9 +484,6 @@
                 echo "Mal";
                 //Misma vista y mensaje de error
             }
-        }else{
-
-        }
     }
 
 
@@ -769,7 +763,7 @@
         if($action=="insertaramigos") $action="vistaInsertAmigos";
         
         if($action=="insertarjuego") $action="vistaInsertarJuego";
-        if($action=="añadir juego") $action="insertarJuego";
+        if($action=="añadirjuego") $action="insertarJuego";
         if($action=="modificaramigo") $action="modificarAmigo";
         if($action=="modificarjuego") $action="modificarJuego";
         if($action=="insertarprestamo") $action="verInsertarPrestamo";

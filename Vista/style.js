@@ -20,4 +20,8 @@ eyes.forEach(eye => {
         // Cambiar icono dependiendo del nuevo estado del input al darle click al icono
         eye.textContent = type === "password" ? "visibility_off" : "visibility";
     })
+
+        inputPassword.addEventListener("mouseenter",()=>{
+            eye.setAttribute("fill", "red");
+    })
 });
