@@ -35,7 +35,7 @@
             }
         ?>
 
-        <!-- Cambiar botón en función de si es admin o usuario, y si es usuario cambiar el botón si se le pasa por la url el valor del nombre del amigo a modificar o no -->
+        <!-- Cambiar botón en función de si se le pasa el valor del id del amigo a modificar o no, se usa $_REQUEST porque el id puede venir desde dos vías, como parámetro por la url al cargar la página inicialmente, o por un parámetro que se le pasa a la función para ir a esta vista si la página se recarga porque la fecha es incorrecta (para que no se pierdan los datos)-->
         <input type="submit" value="<?php if(isset($_REQUEST["idAmigo"])){echo "Modificar amigo";}else{echo "Enviar";} ?>" name="action">
     </form>
     <?php
