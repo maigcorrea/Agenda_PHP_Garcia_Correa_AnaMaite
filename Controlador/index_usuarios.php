@@ -69,7 +69,7 @@
                         $tipo="usuario";
                         require_once("../Modelo/class_amigo.php");
                         $amigo=new Amigo();
-                        $datosAmigo=$amigo->get_Amigos($nUsu);
+                        $datosAmigo=$amigo->get_Amigos($_SESSION["id"]);
 
 
                         require_once("../Vista/cabecera.php");
@@ -126,7 +126,7 @@
             $tipo="usuario";
             require_once("../Modelo/class_amigo.php");
             $amigo=new Amigo();
-            $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
+            $datosAmigo=$amigo->get_Amigos($_SESSION["id"]);
     
             require_once("../Vista/cabecera.php");
             require_once("../Vista/menu_amigos.php");
@@ -610,7 +610,7 @@
         //AMIGOS
         require_once("../Modelo/class_amigo.php");
         $amigo=new Amigo();
-        $datosAmigo=$amigo->get_Amigos($_SESSION["usu"]);
+        $datosAmigo=$amigo->get_Amigos($_SESSION["id"]);
 
         //JUEGOS
         require_once("../Modelo/class_juego.php");

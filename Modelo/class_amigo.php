@@ -20,10 +20,10 @@
         }
 
 
-        public function get_Amigos($nomUsuario){
-            $sentencia="SELECT amigo.id,amigo.nombre,amigo.apellidos,amigo.f_nac FROM amigo,usuario WHERE amigo.usuario=usuario.id AND usuario.nombre=?;";
+        public function get_Amigos($idUsuario){
+            $sentencia="SELECT amigo.id,amigo.nombre,amigo.apellidos,amigo.f_nac FROM amigo,usuario WHERE amigo.usuario=usuario.id AND usuario.id=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);
-            $consulta->bind_param("s",$nomUsuario);
+            $consulta->bind_param("i",$idUsuario);
             $consulta->bind_result($idAmigo,$nombre,$apellidos,$f_nac);
 
             $consulta->execute();
@@ -36,6 +36,12 @@
 
             $consulta->close();
             return $datosAmigos;
+        }
+
+
+        public function contarAmigos($idUsuario){
+            $sentencia="SELECT count(amigo.id) FROM amigo, usuario where amigo.usuario = usuario.id AND usuario.id=?";
+            
         }
 
         public function get_AllAmigos(){
