@@ -38,10 +38,18 @@
             return $datosAmigos;
         }
 
-
+        //Función para contar los amigos de un usuario
         public function contarAmigos($idUsuario){
             $sentencia="SELECT count(amigo.id) FROM amigo, usuario where amigo.usuario = usuario.id AND usuario.id=?";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$idUsuario);
+            $consulta->bind_result($numAmigos);
             
+            $consulta->execute();
+            $consulta->fetch();
+
+            return $numAmigos;
+
         }
 
         public function get_AllAmigos(){
