@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
+     <!-- <link rel="stylesheet" href="./style.css"> -->
     <style>
+        body{
+            background-color:red;
+        }
+
         img{
             width: 150px;
         }
@@ -17,3 +23,4 @@
     <a href="<?php if(strcmp($tipo,"usuario")==0){ echo '../Controlador/index_usuarios.php?action=vistaPrestamos';} else{echo '../Controlador/index_usuarios.php?action=irVistaUsuarios';} ?>"><?php if(strcmp($tipo,"usuario") == 0){ echo 'Prestamos';} else{ echo 'Usuarios';} ?></a>
     <a href="../Controlador/index_usuarios.php?action=salir">Salir</a>
 </header>
+<body>

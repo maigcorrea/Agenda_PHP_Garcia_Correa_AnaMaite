@@ -3,7 +3,7 @@
 
     <form action="" method="post">
         <label for="amigos">Amigos</label><br>
-        <select name="amigos">
+        <select name="amigos" required>
         <option value="" selected disabled>Selecciona un nombre</option>
             <?php
                 if(isset($datosAmigo)){
@@ -14,7 +14,7 @@
             ?>
         </select><br>
         <label for="juegos">Juegos</label><br>
-        <select name="juegos">
+        <select name="juegos" required>
         <option value="" selected disabled>Selecciona un juego</option>
             <?php
                 if(isset($datosJuegos)){
@@ -25,7 +25,7 @@
             ?>
         </select><br>
         <label for="dia">Dia</label><br>
-        <input type="date" name="dia" min="<?php echo date("Y-m-d",time()-86400*3) ?>" max="<?php echo date("Y-m-d",time()+86400*3) ?>"><br>
+        <input type="date" name="dia" min="<?php echo date("Y-m-d",time()-86400*3) ?>" max="<?php echo date("Y-m-d",time()+86400*3) ?>" required><br>
         <?php
             if(isset($mensaje)) echo "<p>$mensaje</p>";
         ?>
