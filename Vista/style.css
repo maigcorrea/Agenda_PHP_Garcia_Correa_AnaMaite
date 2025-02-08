@@ -1,3 +1,14 @@
-body{
-    background-image: url(./assets/notebook.png);
+.password-field{
+    position: relative;
+    width: fit-content;
+    /* border: solid 2px black; */
+    margin-top: 20px;
+}
+
+.eye{
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    cursor: pointer;
+    font-variation-settings: 'wght' 100;
 }

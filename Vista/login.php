@@ -6,10 +6,7 @@
     <title>Document</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
      <!-- <link rel="stylesheet" href="./style.css"> -->
-    <style>
-       body{
-       }
-    </style>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility,visibility_off" />
 </head>
 <body class="bg-[url(https://i.pinimg.com/736x/86/ed/e5/86ede5f8ebf2e67bd2827abed5b2e144.jpg)] bg-cover">
     <div class="flex justify-center items-center min-h-[90vh] font-mono">
@@ -20,7 +17,10 @@
                 <input type="text" class="border-b-2 focus:outline-hidden w-full h-[60px] hover:bg-green-700 hover:text-white pb-4" placeholder=">" name="nom" value=<?php if(isset($_COOKIE["usuario"])) echo $_COOKIE["usuario"]; ?>><br>
         
                 <label for="contr" class="w-full">Introduce tu contraseña:</label><br>
-                <input type="text" name="contr" class="border-b-2 w-full h-[60px] focus:outline-hidden hover:bg-green-700 hover:text-white pb-4" placeholder=">"><br>
+                <div class="password-field relative w-fit w-full ">
+                    <input type="text" name="contr" class="border-b-2 w-full h-[60px] focus:outline-hidden hover:bg-green-700 hover:text-white pb-4" placeholder=">"><br>
+                    <i class="material-symbols-outlined eye absolute right-[10px] bottom-[0px] cursor-pointer fill-black w-fit h-fit z-10 pb-4"></i>
+                </div>
         
                 <input type="checkbox" name="rec" value=1 class=""> Recordar<br>
         
@@ -31,5 +31,7 @@
     <?php if(isset($_COOKIE["usuario"])) echo $_COOKIE["usuario"]; ?>
     <?php
         if(isset($mensaje)) echo $mensaje;
-    ?>
+    ?>  
+
+    <script src="../Vista/style.js"></script>
 </body>
