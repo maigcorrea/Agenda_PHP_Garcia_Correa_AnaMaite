@@ -13,9 +13,9 @@
         <input type="text" name="nombre" value="<?php if(isset($datos[0])) echo $datos[0];?>" ><br>
         <label for="ape">Apellidos</label><br>
         <input type="text" name="ape" value="<?php if(isset($datos[1])) echo $datos[1];?>" ><br>
-        <!-- Al enviar el formulario hay que comprobar que la fecha no sea futura -->
+        <!-- Al enviar el formulario hay que comprobar que la fecha no sea futura ni que el amigo haya nacido hace dos días, para ello he establecido un mínimo de 10 años para que se pueda insertar al amigo -->
         <label for="nac">Fecha Nacimiento</label><br>
-        <input type="date" name="nac" value="<?php if(isset($datos[2])) echo $datos[2];?>" ><br>
+        <input type="date" name="nac" value="<?php if(isset($datos[2])) echo $datos[2];?>" max="<?php echo (date("Y")-10)."-12-31";?>"><br>
         <!-- Añadir un campo más en caso de que el usuario sea administrador -->
         <?php   
             if(isset($usuarios)) {
@@ -35,6 +35,7 @@
             }
         ?>
 
+            <!-- AHORA ESTO YA NO HARÍA FALTA AL COMPROBAR LAS FECHAS DIRECTAMENTE EN EL INPUT -->
         <!-- Cambiar botón en función de si se le pasa el valor del id del amigo a modificar o no, se usa $_REQUEST porque el id puede venir desde dos vías, como parámetro por la url al cargar la página inicialmente, o por un parámetro que se le pasa a la función para ir a esta vista si la página se recarga porque la fecha es incorrecta (para que no se pierdan los datos)-->
         <input type="submit" value="<?php if(isset($_REQUEST["idAmigo"])){echo "Modificar amigo";}else{echo "Enviar";} ?>" name="action">
     </form>
