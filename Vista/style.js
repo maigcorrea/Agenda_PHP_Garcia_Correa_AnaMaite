@@ -25,3 +25,21 @@ eyes.forEach(eye => {
             eye.setAttribute("fill", "red");
     })
 });
+
+
+
+
+ // Mostrar el toast automáticamente si existe
+//  window.onload = function () {
+//     let toast = document.getElementById("toast");
+//     if (toast) {
+//         setTimeout(() => {
+//             toast.classList.add("opacity-100", "translate-y-0");
+//         }, 200); // Retraso corto para la animación
+
+//         // Ocultarlo después de 5 segundos
+//         setTimeout(() => {
+//             closeToast();
+//         }, 5000);
+//     }
+// };

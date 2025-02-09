@@ -34,9 +34,7 @@
          ?>
      </table>
 
-     <?php
-      if(isset($toast) && $toast!=null){
-         echo '';
-      }
-     ?>
+     
+
+   <!-- <script src="../Vista/style.js"></script>  -->
 </body>
