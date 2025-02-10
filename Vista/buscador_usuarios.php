@@ -1,6 +1,8 @@
-<body>
-<h1>Buscar Usuario</h1>
+<body class="menuAmigos">
+<h1 class="text-center">Buscar Usuario</h1>
 
+<div class="contenedor d-flex justify-content-center">
+    <div class="tableContainer d-flex flex-column mx-5 justify-content-center rounded p-5 mt-4 text-center w-50">
 <form action="" method="post">
     <label for="busqueda">Nombre del usuario</label><br>
     <input type="search" name="busqueda" id=""><br>
@@ -31,4 +33,6 @@ if (isset($_POST['busqueda'])) {
 
 
 ?>
+</div>
+</div>
 </body>

@@ -1,6 +1,8 @@
-<body>
-<h1>Buscar Contacto</h1>
+<body class="menuAmigos">
+<h1 class="text-center">Buscar Contacto</h1>
 
+<div class="contenedor d-flex justify-content-center">
+    <div class="tableContainer d-flex flex-column mx-5 justify-content-center rounded p-5 mt-4 text-center w-50">
     <form action="" method="post">
         <label for="busqueda">Nombre / Apellidos del amigo</label><br>
         <input type="search" name="busqueda" id=""><br>
@@ -27,4 +29,6 @@
 
     
 ?>
+</div>
+</div>
 </body>
