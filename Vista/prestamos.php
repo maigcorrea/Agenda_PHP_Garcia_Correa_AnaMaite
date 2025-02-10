@@ -1,11 +1,14 @@
 
-<body>
-    <h1>Prestamos</h1>
+<body class="menuAmigos">
+    <h1 class="text-center mt-5">Prestamos</h1>
+<div class="botonesContainer d-flex justify-content-end mx-5">
     <form action="../Controlador/index_usuarios.php" method="post">
         <input type="submit" value="Insertar prestamo" name="action">
         <input type="submit" value="Buscar prestamos" name="action">
     </form>
+</div>
 
+<div class="tableContainer d-flex flex-column mx-5 justify-content-center rounded p-5 mt-4 text-center">
     <table>
         <tr><th>Amigo</th><th>Juego</th><th> </th><th>Fecha</th><th>Devuelto</th></tr>
         <?php
@@ -25,4 +28,5 @@
             }
         ?>
     </table>
+</div>
 </body>

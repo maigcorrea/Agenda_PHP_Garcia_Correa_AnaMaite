@@ -1,12 +1,14 @@
-<body>
-    <h1>Buscar Prestamo</h1>
+<body class="menuAmigos">
+    <h1 class="text-center">Buscar Prestamo</h1>
 
+    <div class="contenedor d-flex justify-content-center">
+    <div class="tableContainer d-flex flex-column mx-5 justify-content-center rounded p-5 mt-4 text-center w-50">
     <form action="" method="post">
         <label for="busqueda">Nombre del amigo / Titulo del juego</label><br>
         <input type="search" name="busqueda" id=""><br>
         <input type="hidden" name="tipoBusq" value="prestamos">
 
-        <input type="submit" value="Buscar" name="action">
+        <input type="submit" class="mb-5" value="Buscar" name="action">
     </form>
 
     <?php
@@ -22,7 +24,7 @@
                     $disponible="NO";
                 }
                 
-                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td>$disponible</td></tr>";
+                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td>$disponible</td>";
                 echo "<td><a href='"."../Controlador/index_usuarios.php?action=devolverPrestamo&id=". $key ."'";
                 if($value[4]==1) echo "onclick='return false'";
                 echo ">Devolver</a></td></tr>";
@@ -41,4 +43,6 @@
             echo $msj;
         }
     ?>
+    </div>
+    </div>
 </body>

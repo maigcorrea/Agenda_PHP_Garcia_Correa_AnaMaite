@@ -14,7 +14,7 @@
             <h1 class="w-full text-[75px] mb-[90px] border-b-2 border-green-700">AGENDA</h1>
             <form action="../Controlador/index_usuarios.php" method="post" class="w-full leading-[80px]">
                 <label for="nom" class="w-full">Introduce tu nombre:</label><br>
-                <input type="text" class="border-b-2 focus:outline-hidden w-full h-[60px] hover:bg-green-700 hover:text-white pb-4" placeholder=">" name="nom" value=<?php if(isset($_COOKIE["usuario"])) echo $_COOKIE["usuario"]; ?> required><br>
+                <input type="text" class="border-b-2 focus:outline-hidden w-full h-[60px] hover:bg-green-700 hover:text-white pb-4" placeholder=">" name="nom" required value=<?php if(isset($_COOKIE["usuario"])) echo $_COOKIE["usuario"]; ?> ><br>
         
                 <label for="contr" class="w-full">Introduce tu contraseña:</label><br>
                 <div class="password-field relative w-fit w-full ">
