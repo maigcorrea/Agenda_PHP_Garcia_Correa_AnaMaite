@@ -477,7 +477,7 @@
 
             //Si se inserta, redireccionar a la vista de juegos
             if($insertado){
-                echo "Insertado";
+                juegos();
                 //Vista de juegos y mensaje de que se ha insertado correctamente
                 
             }else{
