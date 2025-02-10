@@ -12,13 +12,10 @@
     <label for="plat">Plataforma</label><br>
     <input type="text" name="plat" value="<?php if(isset($datos[1])) echo $datos[1] ?>" required><br>
     <label for="lanz">Año de lanzamiento</label><br>
-    <input type="number" name="lanz" value="<?php if(isset($datos[2])) echo $datos[2] ?>" max=<?php echo date("Y",time())?> required><br>
+    <input type="number" name="lanz" value="<?php if(isset($datos[2])) echo $datos[2] ?>" min="1952" max=<?php echo date("Y",time())?> required><br>
     <label for="img">Imagen:</label><br>
     <input type="file" name="img"><br>
 
-    <?php
-
-    ?>
 
     <!-- Cambiar botón en función de si se le pasa por la url el valor del id del juego a modificar o no -->
     <input type="submit"  value="<?php if(isset($_GET["id"])){echo "Modificar juego";}else{echo "Añadir juego";}?>" name="action">

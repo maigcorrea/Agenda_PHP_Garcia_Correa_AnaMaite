@@ -4,23 +4,23 @@
 
     <form action="../Controlador/index_usuarios.php" method="POST">
         <!-- Si se le pasa el valor de un id de amigo a modificar por la url, se almacena en un campo oculto, así al enviar el formulario se podrá utilizar el valor en la función de modificarAmigo() -->
-        <?php if(isset($_REQUEST["idAmigo"])) echo "<input type='hidden' name='idAmigo' value='".htmlspecialchars($_REQUEST["idAmigo"])."'>"; if(isset($_REQUEST["idAmigo"])) echo $_REQUEST["idAmigo"];?>
+        <?php if(isset($_REQUEST["idAmigo"])) echo "<input type='hidden' name='idAmigo' value='".htmlspecialchars($_REQUEST["idAmigo"])."'>";?>
         
 
         <label for="nombre">Nombre</label><br>
        <!-- Establecer los datos del array para rellenar los campos automáticamente-->
         <!-- Utilizo htmlspecialchars como una medida de seguridad para evitar ataques de inyección de código, convierte los caracteres especiales de HTML en su representación segura -->
-        <input type="text" name="nombre" value="<?php if(isset($datos[0])) echo $datos[0];?>" ><br>
+        <input type="text" name="nombre" value="<?php if(isset($datos[0])) echo $datos[0];?>" required ><br>
         <label for="ape">Apellidos</label><br>
-        <input type="text" name="ape" value="<?php if(isset($datos[1])) echo $datos[1];?>" ><br>
+        <input type="text" name="ape" value="<?php if(isset($datos[1])) echo $datos[1];?>" required ><br>
         <!-- Al enviar el formulario hay que comprobar que la fecha no sea futura ni que el amigo haya nacido hace dos días, para ello he establecido un mínimo de 10 años para que se pueda insertar al amigo -->
         <label for="nac">Fecha Nacimiento</label><br>
-        <input type="date" name="nac" value="<?php if(isset($datos[2])) echo $datos[2];?>" max="<?php echo (date("Y")-10)."-12-31";?>"><br>
+        <input type="date" name="nac" value="<?php if(isset($datos[2])) echo $datos[2];?>" min="1927-01-01" max="<?php echo (date("Y")-10)."-12-31";?>" required><br>
         <!-- Añadir un campo más en caso de que el usuario sea administrador -->
         <?php   
             if(isset($usuarios)) {
                 echo "<label for='duenio'>Dueño</label><br>";
-                echo "<select name='duenio'>";
+                echo "<select name='duenio' required>";
                 foreach ($usuarios as $key => $value) {
                     echo "<option value='$key'";
                     if(isset($duenio)){
