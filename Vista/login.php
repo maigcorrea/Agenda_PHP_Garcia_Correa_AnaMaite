@@ -28,7 +28,7 @@
             </form>
         </div>
     </div>
-    <?php if(isset($_COOKIE["usuario"])) echo $_COOKIE["usuario"]; ?>
+    <!-- <?php if(isset($_COOKIE["usuario"])) echo $_COOKIE["usuario"]; ?> -->
     <?php
         if(isset($mensaje)) echo $mensaje;
     ?>  
