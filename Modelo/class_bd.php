@@ -6,6 +6,7 @@
 
         public function __construct(){
             $this->conn=new mysqli("localhost",USU_CONN,PSW_CONN,"agenda");
+            $this->conn->set_charset("utf8");
         } 
 
         public function getConection(){
