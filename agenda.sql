@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2025 a las 12:50:52
+-- Tiempo de generación: 10-02-2025 a las 20:43:48
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -45,11 +45,12 @@ INSERT INTO `amigo` (`id`, `nombre`, `apellidos`, `f_nac`, `usuario`) VALUES
 (3, 'Jaled', 'no se', '2001-09-12', 2),
 (4, 'asfd', 'crfeg', '2015-12-15', 1),
 (5, 't45t', 'gers5t', '1933-10-31', 1),
-(6, 'Juande', 'no me acuerdo', '2025-01-08', 1),
+(6, 'Juande', 'Elpedrolas', '1998-12-08', 10),
 (19, 'Manu', 'Romero', '2025-01-01', 1),
 (20, 'Dani', 'Martí­n', '2015-12-16', 3),
-(23, 'Ale', 'cdrswgf', '1927-01-27', 1),
-(34, 'Ángel', 'Espinosa', '2002-02-28', 10);
+(23, 'Ale', 'Chivato', '1927-01-27', 1),
+(34, 'Ángel', 'Espinosa', '2002-02-28', 10),
+(35, 'Paco', 'Requena', '2005-12-20', 1);
 
 -- --------------------------------------------------------
 
@@ -72,11 +73,13 @@ CREATE TABLE `juego` (
 
 INSERT INTO `juego` (`id`, `titulo`, `plataforma`, `lanzamiento`, `img`, `usuario`) VALUES
 (1, 'Goat Simulator  ', 'PC', 2018, '../img/Erica/descarga6.jfif', 1),
-(2, 'MineCraft', 'PC', 2009, 'luego', 4),
 (3, 'WOW  ', 'PC', 2004, '../img/Erica/descarga2.jfif', 1),
-(5, 'Fortnite', 'PC', 2000, '../img/Erica/descarga5.jfif', 1),
+(5, 'Fortnite ', 'PC', 2017, '../img/Erica/descarga5.jfif', 1),
 (11, ' Animal Crossing', 'Nintendo', 2010, '../img/Erica/descarga3.jfif', 1),
-(12, ' Mario Wonder  ', 'PC', 2008, '../img/Erica/descarga4.jfif', 1);
+(12, ' Mario Wonder  ', 'PC', 2008, '../img/Erica/descarga4.jfif', 1),
+(13, ' Marvel Rivals   ', 'PC', 2025, '../img/Erica/marvel-rivals-780x470.jpg', 1),
+(14, ' mineccraft2', 'PC', 2019, '../img/Erica/2x1_NSwitch_Minecraft_image1280w.jpg', 1),
+(15, ' algo', 'nada', 2021, '../img/Erica/', 1);
 
 -- --------------------------------------------------------
 
@@ -98,8 +101,10 @@ CREATE TABLE `prestamo` (
 --
 
 INSERT INTO `prestamo` (`id`, `usuario`, `amigo`, `juego`, `f_prestamo`, `devuelto`) VALUES
-(16, 1, 19, 11, '2025-02-11', 0),
-(17, 1, 6, 3, '2025-02-07', 0);
+(16, 1, 19, 11, '2025-02-11', 1),
+(17, 1, 6, 3, '2025-02-07', 0),
+(18, 1, 19, 13, '2025-02-10', 1),
+(19, 1, 35, 13, '2025-02-10', 0);
 
 -- --------------------------------------------------------
 
@@ -171,19 +176,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `amigo`
 --
 ALTER TABLE `amigo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `juego`
 --
 ALTER TABLE `juego`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
