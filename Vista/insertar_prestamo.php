@@ -32,7 +32,7 @@
                 if(isset($mensaje)) echo "<p>$mensaje</p>";
             ?>
 
-            <input type="submit" value="Insertar" name="action">
+            <input type="submit" value="Insertar" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
         </form>
     </div>
 </div>

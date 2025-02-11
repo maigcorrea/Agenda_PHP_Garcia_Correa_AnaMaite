@@ -42,6 +42,20 @@
             border-radius: 10px;
             border: 1px solid rgba( 255, 255, 255, 0.18 );
         }
+
+        
+
+        .neon-effect {
+          transition: all 0.3s ease-in-out !important;
+        }
+
+        .neon-effect:hover {
+          box-shadow: 0px 0px 7px 5px rgb(245, 165, 44), /* Resplandor principal azul */
+                      0 0 15px 5px rgba(0, 0, 0, 0.4), /* Resplandor cercano */
+                      0 0 15px 5px rgba(0, 0, 0, 0.5) !important; /* Resplandor secundario */
+        }
+
+
     </style>
 </head>
 <header>

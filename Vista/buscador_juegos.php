@@ -8,7 +8,7 @@
             <input type="search" name="busqueda" id=""><br>
             <input type="hidden" name="tipoBusq" value="juegos">
 
-            <input type="submit" value="Buscar" name="action">
+            <input type="submit" value="Buscar" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
         </form>
 
         <?php

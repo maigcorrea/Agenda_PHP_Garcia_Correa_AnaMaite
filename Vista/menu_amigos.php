@@ -7,8 +7,8 @@
      </form> -->
    <div class="botonesContainer d-flex justify-content-end mx-5">
       <form action="../Controlador/index_usuarios.php" method="POST">
-         <input type="submit" value="Insertar amigos" name="action">
-         <input type="submit" value="Buscar Amigos" name="action">
+         <input type="submit" value="Insertar amigos" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
+         <input type="submit" value="Buscar Amigos" name="action" class="btn btn-success btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
       </form>
    </div>
 

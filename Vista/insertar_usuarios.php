@@ -12,7 +12,7 @@
             <label for="contr">Contraseña:</label><br>
             <input type="text" class="mb-5" name="contr" value="<?php if(isset($datos[1])) echo $datos[1] ?>" required><br>
     
-            <input type="submit" value="<?php if(isset($_GET["id"])){echo "Modificar usuario";}else{echo "Insertar Usuario";}?>" name="action">
+            <input type="submit" value="<?php if(isset($_GET["id"])){echo "Modificar usuario";}else{echo "Insertar Usuario";}?>" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
         </form>
     </div>
 </div>

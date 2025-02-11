@@ -39,7 +39,7 @@
 
                 <!-- AHORA ESTO YA NO HARÍA FALTA AL COMPROBAR LAS FECHAS DIRECTAMENTE EN EL INPUT -->
             <!-- Cambiar botón en función de si se le pasa el valor del id del amigo a modificar o no, se usa $_REQUEST porque el id puede venir desde dos vías, como parámetro por la url al cargar la página inicialmente, o por un parámetro que se le pasa a la función para ir a esta vista si la página se recarga porque la fecha es incorrecta (para que no se pierdan los datos)-->
-            <input type="submit" value="<?php if(isset($_REQUEST["idAmigo"])){echo "Modificar amigo";}else{echo "Enviar";} ?>" name="action">
+            <input type="submit" value="<?php if(isset($_REQUEST["idAmigo"])){echo "Modificar amigo";}else{echo "Enviar";} ?>" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
         </form>
         <?php
             if(isset($mensaje)) echo "<p>$mensaje</p>";

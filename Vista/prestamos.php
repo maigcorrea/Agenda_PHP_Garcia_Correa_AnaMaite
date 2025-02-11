@@ -3,8 +3,8 @@
     <h1 class="text-center mt-5">Prestamos</h1>
 <div class="botonesContainer d-flex justify-content-end mx-5">
     <form action="../Controlador/index_usuarios.php" method="post">
-        <input type="submit" value="Insertar prestamo" name="action">
-        <input type="submit" value="Buscar prestamos" name="action">
+        <input type="submit" value="Insertar prestamo" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
+        <input type="submit" value="Buscar prestamos" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
     </form>
 </div>
 

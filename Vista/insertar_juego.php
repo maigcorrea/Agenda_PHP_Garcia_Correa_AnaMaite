@@ -21,7 +21,7 @@
 
 
             <!-- Cambiar botón en función de si se le pasa por la url el valor del id del juego a modificar o no -->
-            <input type="submit"  value="<?php if(isset($_GET["id"])){echo "Modificar juego";}else{echo "Añadir juego";}?>" name="action">
+            <input type="submit"  value="<?php if(isset($_GET["id"])){echo "Modificar juego";}else{echo "Añadir juego";}?>" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
 
         </form>
     </div>
