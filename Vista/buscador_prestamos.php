@@ -8,13 +8,13 @@
         <input type="search" name="busqueda" id=""><br>
         <input type="hidden" name="tipoBusq" value="prestamos">
 
-        <input type="submit" class="mb-5" value="Buscar" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
+        <input type="submit" value="Buscar" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect mb-5 mt-3" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
     </form>
 
     <?php
     if (isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
         if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
-            echo "<table><tr><th>Usuario</th><th>Amigo</th><th>Juego</th><th>Fecha</th><th>Devuelto</th></tr>";
+            echo "<table><tr><th>Usuario</th><th>Amigo</th><th>Juego</th><th></th><th>Fecha</th><th>Devuelto</th></tr>";
             
             foreach ($resultadosBusqueda as $key => $value) {
                 $disponible;
@@ -24,7 +24,7 @@
                     $disponible="NO";
                 }
                 
-                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td>$disponible</td>";
+                echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td><img src='$value[3]'</td><td>$value[4]</td><td>$disponible</td>";
                 echo "<td><a href='"."../Controlador/index_usuarios.php?action=devolverPrestamo&id=". $key ."'";
                 if($value[4]==1) echo "onclick='return false'";
                 echo ">Devolver</a></td></tr>";

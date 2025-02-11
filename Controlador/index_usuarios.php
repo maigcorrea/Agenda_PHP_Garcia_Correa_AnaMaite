@@ -362,7 +362,7 @@
                     case 'prestamos':
                         require_once("../Modelo/class_prestamo.php");
                         $prestamo=new Prestamo();
-                        $resultadosBusqueda=$prestamo->buscarPrestamo($busqueda);
+                        $resultadosBusqueda=$prestamo->buscarPrestamo($busqueda,$_SESSION['id']);
                         require_once("../Vista/cabecera.php");
                         require_once("../Vista/buscador_prestamos.php");
                         require_once("../Vista/pie.html");

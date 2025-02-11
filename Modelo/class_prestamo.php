@@ -21,7 +21,7 @@
         }
 
         public function get_prestamos($idUsuario){
-            $sentencia="SELECT prestamo.id, amigo.nombre, juego.titulo, juego.img, prestamo.f_prestamo, prestamo.devuelto FROM prestamo, amigo, juego where prestamo.amigo=amigo.id AND prestamo.juego=juego.id AND prestamo.usuario=?;";
+            $sentencia="SELECT prestamo.id, amigo.nombre, juego.titulo, juego.img, prestamo.f_prestamo, prestamo.devuelto FROM prestamo, amigo, juego where prestamo.amigo=amigo.id AND prestamo.juego=juego.id AND prestamo.usuario=? ORDER BY f_prestamo DESC;";
 
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $consulta->bind_param("i",$idUsuario);
@@ -69,24 +69,24 @@
         }
 
 
-        public function buscarPrestamo($busqueda){
-            $sentencia="SELECT usuario.nombre, amigo.nombre, juego.titulo, prestamo.f_prestamo, prestamo.devuelto, prestamo.id
+        public function buscarPrestamo($busqueda, $idUser){
+            $sentencia="SELECT usuario.nombre, amigo.nombre, juego.titulo, juego.img, prestamo.f_prestamo, prestamo.devuelto, prestamo.id
                         FROM prestamo
                         JOIN usuario ON prestamo.usuario = usuario.id
                         JOIN amigo ON prestamo.amigo = amigo.id
                         JOIN juego ON prestamo.juego = juego.id
-                        WHERE amigo.nombre LIKE ? OR juego.titulo LIKE ?;";
+                        WHERE (amigo.nombre LIKE ? OR juego.titulo LIKE ?) AND usuario.id=?;";
 
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $param=$busqueda."%";
-            $consulta->bind_param("ss", $param, $param);
-            $consulta->bind_result($usu, $amigo, $juego, $f_pres, $dev, $id);
+            $consulta->bind_param("ssi", $param, $param, $idUser);
+            $consulta->bind_result($usu, $amigo, $juego, $img, $f_pres, $dev, $id);
 
             $consulta->execute();
 
             $datos=[];
             while($consulta->fetch()){
-                $datos[$id]=[$usu, $amigo, $juego, $f_pres, $dev];
+                $datos[$id]=[$usu, $amigo, $juego, $img, $f_pres, $dev];
             }
 
             $consulta->close();

@@ -9,7 +9,7 @@
     <!-- Mediante un campo oculto indico de qué es la busqueda para saber dentro de una función en el controlador a qué clase y método llamar -->
     <input type="hidden" name="tipoBusq" value="usuarios">
 
-    <input type="submit" value="Buscar" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
+    <input type="submit" value="Buscar" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect mb-5 mt-3" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
 </form>
 
 <?php
