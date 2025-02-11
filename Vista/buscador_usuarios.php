@@ -31,6 +31,9 @@ if (isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
     }
 }
 
+if(isset($msj)){
+    echo $msj;
+}
 
 ?>
 </div>

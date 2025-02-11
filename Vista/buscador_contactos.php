@@ -27,6 +27,9 @@
         }
     }
 
+    if(isset($msj)){
+        echo $msj;
+    }
     
 ?>
 </div>
