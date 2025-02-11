@@ -12,7 +12,7 @@
     </form>
 
     <?php
-    if (isset($_POST['busqueda'])) {
+    if (isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
         if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
             echo "<table><tr><th>Usuario</th><th>Amigo</th><th>Juego</th><th>Fecha</th><th>Devuelto</th></tr>";
             
@@ -29,9 +29,6 @@
                 if($value[4]==1) echo "onclick='return false'";
                 echo ">Devolver</a></td></tr>";
             }
-
-            
-        
 
             echo "</table>";
         }else{

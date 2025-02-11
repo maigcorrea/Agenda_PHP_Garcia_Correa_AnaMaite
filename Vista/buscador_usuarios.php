@@ -13,7 +13,7 @@
 </form>
 
 <?php
-if (isset($_POST['busqueda'])) {
+if (isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
     if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
         echo "<table><tr><th>ID</th><th>Nombre</th><th>Contraseña</th></tr>";
         

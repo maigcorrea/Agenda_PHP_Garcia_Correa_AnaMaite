@@ -131,11 +131,11 @@
         }
 
 
-        public function buscarJuego($busqueda){
-            $sentencia="SELECT id, img, titulo, plataforma, lanzamiento  FROM juego WHERE titulo LIKE ? OR plataforma LIKE ?;";
+        public function buscarJuego($busqueda,$id){
+            $sentencia="SELECT id, img, titulo, plataforma, lanzamiento FROM juego WHERE (titulo LIKE ? OR plataforma LIKE ?) AND usuario=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $param=$busqueda."%";
-            $consulta->bind_param("ss", $param, $param);
+            $consulta->bind_param("ssi", $param, $param,$id);
             $consulta->bind_result($id, $img, $titulo, $plataforma, $lanzamiento);
 
             $consulta->execute();

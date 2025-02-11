@@ -338,15 +338,6 @@
 
         //Si el campo no se ha enviado vacío, se muestran los resultados
         if(!empty($busqueda)){
-            //En función del valor de un campo oculto, se sabe que datos estamos buscando, si de amigos, juegos o préstamos
-            // if($_POST["tipoBusq"]=="amigos"){
-            //     require_once("../Modelo/class_amigo.php");
-            //     $amigo=new Amigo();
-            //     $resultadosBusqueda=$amigo->buscarAmigo($busqueda);
-            // }else if($_POST["juegos"]){
-            //     require_once("../Modelo/class_juego.php");
-            //     $juego=new Juego();
-            // }
             if($tipo==="usuario"){
                 
                 switch ($_POST["tipoBusq"]) {
@@ -362,7 +353,7 @@
                     case 'juegos':
                         require_once("../Modelo/class_juego.php");
                         $juego=new Juego();
-                        $resultadosBusqueda=$juego->buscarJuego($busqueda);
+                        $resultadosBusqueda=$juego->buscarJuego($busqueda, $_SESSION['id']);
                         require_once("../Vista/cabecera.php");
                         require_once("../Vista/buscador_juegos.php");
                         require_once("../Vista/pie.html");
@@ -402,10 +393,49 @@
             
         }else{
             $msj="El campo está vacío, rellenalo para buscar";
-            //Aqui se redirigiria a la vista en función del campo oculto también
-            // require_once("../Vista/cabecera.php");
-            // require_once("../Vista/buscador_amigos.php");
-            // require_once("../Vista/pie.html");
+            
+            if($tipo==="usuario"){
+                
+                switch ($_POST["tipoBusq"]) {
+                    case 'amigos':
+                        
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_amigos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                    
+                    case 'juegos':
+        
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_juegos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                    
+                    case 'prestamos':
+                        
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_prestamos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                }
+
+            }else if($tipo==="admin"){
+                switch ($_POST["tipoBusq"]) {
+                    case 'amigos':
+                        
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_contactos.php");
+                        require_once("../Vista/pie.html");
+                        break;
+
+                    case 'usuarios':
+                        
+                        require_once("../Vista/cabecera.php");
+                        require_once("../Vista/buscador_usuarios.php");
+                        require_once("../Vista/pie.html");
+                        break;
+                }
+            }
         }
 
 

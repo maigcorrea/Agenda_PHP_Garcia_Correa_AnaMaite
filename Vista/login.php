@@ -22,7 +22,7 @@
                     <i class="material-symbols-outlined eye absolute right-[10px] bottom-[0px] cursor-pointer w-fit h-fit z-10 pb-4"></i>
                 </div>
         
-                <input type="checkbox" name="rec" value=1 class="" <?php if(isset($_COOKIE["usuario"])) echo "checked"; ?> required><span class="text-[30px]"> Recordar</span><br>
+                <input type="checkbox" name="rec" value=1 class="" <?php if(isset($_COOKIE["usuario"])) echo "checked"; ?>><span class="text-[30px]"> Recordar</span><br>
         
                 <input type="submit" class="border-2 cursor-pointer w-fit capitalize hover:bg-green-700 hover:text-white px-3" value="iniciar" name="action">
             </form>

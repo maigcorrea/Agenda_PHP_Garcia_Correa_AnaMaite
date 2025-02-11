@@ -11,7 +11,7 @@
             <!-- Establecer los datos del array para rellenar los campos automáticamente-->
             <!-- Utilizo htmlspecialchars como una medida de seguridad para evitar ataques de inyección de código, convierte los caracteres especiales de HTML en su representación segura -->
             <label for="tit">Titulo:</label><br>
-            <input type="text" class="mb-2" name="tit" value="<?php if(isset($datos[0])) echo $datos[0] ?> " required><br>
+            <input type="text" class="mb-2" name="tit" value="<?php if(isset($datos[0])) echo $datos[0] ?>" required><br>
             <label for="plat">Plataforma:</label><br>
             <input type="text" class="mb-2" name="plat" value="<?php if(isset($datos[1])) echo $datos[1] ?>" required><br>
             <label for="lanz">Año de lanzamiento:</label><br>
