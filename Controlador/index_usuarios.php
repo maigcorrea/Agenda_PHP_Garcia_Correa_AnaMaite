@@ -533,8 +533,11 @@
             //Actualizar con los nuevos datos
             $modificado=$juego->modificar_juego($_POST["tit"],$_POST["plat"],$_POST["lanz"],$destino,$_POST["idJuego"]);
             
+            //ANTES COMPROBAR QUE LA RUTA EXISTA
             //Borrar la img anterior de la carpeta
-            unlink($rutaImgActual);
+            if(file_exists($rutaImgActual)){
+                unlink($rutaImgActual);
+            }
             
             if($modificado){
                 //Redirigir al menu de juegos y mostrar toast de Exito
