@@ -16,7 +16,7 @@
         //Se comprueba si se ha enviado el formulario, si es así, si hat resultados compatibles con la búsqueda se muestran, sino, aparece un mensaje
         if (isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
                 if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
-                    echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th></tr>";
+                    echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimiento</th></tr>";
                     
                     foreach ($resultadosBusqueda as $key => $value) {
                         echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&idAmigo=".urldecode($key)."'>Modificar</a></td></tr>";

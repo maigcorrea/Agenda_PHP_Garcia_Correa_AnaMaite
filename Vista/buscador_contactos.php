@@ -15,7 +15,7 @@
 <?php
     if (isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
         if(isset($resultadosBusqueda) && !empty($resultadosBusqueda)){
-            echo "<table><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th><th>Dueño</th></tr>";
+            echo "<table class=''><tr><th>Nombre</th><th>Apellidos</th><th>Nacimineto</th><th>Dueño</th></tr>";
             
             foreach ($resultadosBusqueda as $key => $value) {
                 echo "<tr><td>$value[0]</td><td>$value[1]</td><td>$value[2]</td><td>$value[3]</td><td><a href='../Controlador/index_usuarios.php?action=Insertar amigos&id=".urldecode($key)."'>Modificar</a></td></tr>";
