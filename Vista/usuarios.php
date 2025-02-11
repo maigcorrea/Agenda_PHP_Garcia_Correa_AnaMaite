@@ -1,5 +1,5 @@
 <body class="menuAmigos">
-    <h1>USUARIOS</h1>
+    <h1 class="text-center">USUARIOS</h1>
 <div class="botonesContainer d-flex justify-content-end mx-5">
     <form action="" method="POST">
         <input type="submit" value="Insertar Usuarios" name="action" class="btn btn-primary btn-lg rounded-pill shadow-sm hover-shadow-lg neon-effect" style="background-color: #fada4b; border-color: #f5a52c; color: black;">
