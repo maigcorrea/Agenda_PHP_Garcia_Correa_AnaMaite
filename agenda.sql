@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2025 a las 20:43:48
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 11-02-2025 a las 23:32:30
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,17 +40,20 @@ CREATE TABLE `amigo` (
 --
 
 INSERT INTO `amigo` (`id`, `nombre`, `apellidos`, `f_nac`, `usuario`) VALUES
-(1, 'Pachito', 'Rodríguez', '2002-01-15', 2),
-(2, 'Manuel', 'Castillo', '2004-05-09', 4),
-(3, 'Jaled', 'no se', '2001-09-12', 2),
-(4, 'asfd', 'crfeg', '2015-12-15', 1),
-(5, 't45t', 'gers5t', '1933-10-31', 1),
-(6, 'Juande', 'Elpedrolas', '1998-12-08', 10),
-(19, 'Manu', 'Romero', '2025-01-01', 1),
-(20, 'Dani', 'Martí­n', '2015-12-16', 3),
-(23, 'Ale', 'Chivato', '1927-01-27', 1),
-(34, 'Ángel', 'Espinosa', '2002-02-28', 10),
-(35, 'Paco', 'Requena', '2005-12-20', 1);
+(35, 'Beth', 'Miller', '1990-02-06', 1),
+(36, 'Natalia', 'Gómez', '2013-06-30', 1),
+(37, 'Sergio', 'Sánchez', '2003-09-15', 1),
+(38, 'Carlos', 'Ruiz', '2014-11-12', 1),
+(39, 'Ana', 'Romero', '2015-12-12', 1),
+(40, 'Fernando', 'Molina', '2006-03-20', 1),
+(41, 'Pedro', 'Cortés', '2001-02-02', 3),
+(42, 'Miguel', 'Marín', '2007-06-24', 3),
+(43, 'Noelia', 'Vega', '2005-04-05', 3),
+(44, 'Enrique', 'Muñoz', '1994-10-20', 3),
+(45, 'Irene', 'León', '2010-12-09', 4),
+(46, 'Rafael', 'Castillo', '2006-08-03', 4),
+(47, 'Luis', 'Herrera', '2005-06-02', 4),
+(48, 'Sonia', 'Ríos', '2008-01-28', 4);
 
 -- --------------------------------------------------------
 
@@ -63,7 +66,7 @@ CREATE TABLE `juego` (
   `titulo` varchar(100) NOT NULL,
   `plataforma` varchar(100) NOT NULL,
   `lanzamiento` int(4) NOT NULL,
-  `img` varchar(450) NOT NULL,
+  `img` varchar(250) NOT NULL,
   `usuario` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -72,14 +75,18 @@ CREATE TABLE `juego` (
 --
 
 INSERT INTO `juego` (`id`, `titulo`, `plataforma`, `lanzamiento`, `img`, `usuario`) VALUES
-(1, 'Goat Simulator  ', 'PC', 2018, '../img/Erica/descarga6.jfif', 1),
-(3, 'WOW  ', 'PC', 2004, '../img/Erica/descarga2.jfif', 1),
-(5, 'Fortnite ', 'PC', 2017, '../img/Erica/descarga5.jfif', 1),
-(11, ' Animal Crossing', 'Nintendo', 2010, '../img/Erica/descarga3.jfif', 1),
-(12, ' Mario Wonder  ', 'PC', 2008, '../img/Erica/descarga4.jfif', 1),
-(13, ' Marvel Rivals   ', 'PC', 2025, '../img/Erica/marvel-rivals-780x470.jpg', 1),
-(14, ' mineccraft2', 'PC', 2019, '../img/Erica/2x1_NSwitch_Minecraft_image1280w.jpg', 1),
-(15, ' algo', 'nada', 2021, '../img/Erica/', 1);
+(1, 'Fornite', 'PC', 2017, '../img/Erica/descarga5.jfif', 1),
+(2, 'MineCraft', 'PC', 2009, '../img/Fran/BentoHero_4x_Vanilla_1920x1080.jpg', 4),
+(3, 'WOW', 'PC', 2004, '../img/Erica/descarga2.jfif', 1),
+(17, 'MineCraft', 'PC', 2000, '../img/Erica/2x1_NSwitch_Minecraft_image1280w.jpg', 1),
+(18, 'Marvel Rivals', 'PC', 2024, '../img/Erica/Marvel_Rivals.webp', 1),
+(19, 'Goat Simulator', 'PC', 2015, '../img/Erica/descarga6.jfif', 1),
+(20, 'Goat Simulator', 'PC', 2015, '../img/Redu/descarga6.jfif', 3),
+(21, 'Mario Wonder', 'PC', 2020, '../img/Redu/descarga4.jfif', 3),
+(22, 'Call of Duty', 'PC', 2017, '../img/Redu/call.jpeg', 3),
+(23, 'Mario Kart', 'PC', 2023, '../img/Fran/Mario-Kart-8-Deluxe_2022_11-21-22_004.png', 4),
+(24, 'Valorant', 'PC', 2020, '../img/Fran/valorant.jpeg', 4),
+(25, 'Resident Evil 4', 'PC', 2019, '../img/Fran/resident.jpeg', 4);
 
 -- --------------------------------------------------------
 
@@ -101,10 +108,13 @@ CREATE TABLE `prestamo` (
 --
 
 INSERT INTO `prestamo` (`id`, `usuario`, `amigo`, `juego`, `f_prestamo`, `devuelto`) VALUES
-(16, 1, 19, 11, '2025-02-11', 1),
-(17, 1, 6, 3, '2025-02-07', 0),
-(18, 1, 19, 13, '2025-02-10', 1),
-(19, 1, 35, 13, '2025-02-10', 0);
+(10, 1, 37, 1, '2025-02-08', 1),
+(11, 1, 39, 18, '2025-02-10', 0),
+(12, 1, 38, 1, '2025-02-11', 0),
+(13, 3, 42, 21, '2025-02-13', 0),
+(14, 3, 44, 22, '2025-02-10', 0),
+(15, 4, 48, 25, '2025-02-12', 0),
+(16, 4, 47, 23, '2025-02-10', 0);
 
 -- --------------------------------------------------------
 
@@ -127,9 +137,8 @@ INSERT INTO `usuario` (`id`, `nombre`, `contrasenia`, `tipo`) VALUES
 (1, 'Erica', 'hola123', 'usuario'),
 (2, 'Maite', 'hola123', 'usuario'),
 (3, 'Redu', 'hola123', 'usuario'),
-(4, 'Fran', 'Morales', 'usuario'),
-(5, 'admin', 'admin', 'admin'),
-(10, 'Pepa Pig', 'holaMundo', 'usuario');
+(4, 'Fran', 'hola123', 'usuario'),
+(5, 'admin', 'admin', 'admin');
 
 --
 -- Índices para tablas volcadas
@@ -176,25 +185,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `amigo`
 --
 ALTER TABLE `amigo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `juego`
 --
 ALTER TABLE `juego`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
