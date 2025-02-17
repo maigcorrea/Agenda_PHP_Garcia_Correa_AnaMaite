@@ -820,6 +820,9 @@
             iniSesion();
         }
 
-
+        // ALTER TABLE <nombre_tabla> DROP COLUMN <nombre_columna>
+        // DELETE FROM <nombre_tabla> WHERE condición;
+        // Borrar todas las filas de la tabla clientes.
+        // DELETE FROM clientes;
     }
 ?>
