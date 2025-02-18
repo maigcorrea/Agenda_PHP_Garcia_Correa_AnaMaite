@@ -21,17 +21,17 @@
 
 
         public function get_Amigos($idUsuario){
-            $sentencia="SELECT amigo.id,amigo.nombre,amigo.apellidos,amigo.f_nac FROM amigo,usuario WHERE amigo.usuario=usuario.id AND usuario.id=?;";
+            $sentencia="SELECT amigo.id,amigo.nombre,amigo.apellidos,amigo.f_nac,amigo.verificado FROM amigo,usuario WHERE amigo.usuario=usuario.id AND usuario.id=?;";
             $consulta=$this->conn->getConection()->prepare($sentencia);
             $consulta->bind_param("i",$idUsuario);
-            $consulta->bind_result($idAmigo,$nombre,$apellidos,$f_nac);
+            $consulta->bind_result($idAmigo,$nombre,$apellidos,$f_nac,$ver);
 
             $consulta->execute();
 
             $datosAmigos=[];
 
             while($consulta->fetch()){
-                $datosAmigos[$idAmigo]=[$nombre,$apellidos,$f_nac];
+                $datosAmigos[$idAmigo]=[$nombre,$apellidos,$f_nac,$ver];
             }
 
             $consulta->close();
@@ -115,6 +115,41 @@
             $datos=[];
             while($consulta->fetch()){
                 $datos=[$nombre,$apeliidos,$fecha];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
+
+        public function ordenarNombre($idAmigo){
+            $sentencia="SELECT id,nombre,apellidos,f_nac FROM amigo WHERE usuario=? ORDER BY nombre ASC;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$idAmigo);
+            $consulta->bind_result($id,$nombre,$apeliidos,$fecha);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[$id]=[$nombre,$apeliidos,$fecha];
+            }
+
+            $consulta->close();
+            return $datos;
+        }
+
+        public function ordenarFecha($idAmigo){
+            $sentencia="SELECT id,nombre,apellidos,f_nac FROM amigo WHERE usuario=? ORDER BY f_nac ASC;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("i",$idAmigo);
+            $consulta->bind_result($id,$nombre,$apeliidos,$fecha);
+
+            $consulta->execute();
+
+            $datos=[];
+            while($consulta->fetch()){
+                $datos[$id]=[$nombre,$apeliidos,$fecha];
             }
 
             $consulta->close();

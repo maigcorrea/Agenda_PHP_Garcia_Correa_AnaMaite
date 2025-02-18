@@ -19,9 +19,26 @@
                     $fecha=date("d-m-Y",$timestamp);
                     echo "<tr><td>$value[0]</td><td>$value[1]</td><td><img src='$value[2]' /></td><td>$fecha</td><td>";
                     if($value[4]==1) {echo "SI</td>";} else {echo "NO</td>";};
+                    
             ?>
 
-                <td><a href="../Controlador/index_usuarios.php?action=devolverPrestamo&id=<?php echo $key ?>" <?php if($value[4]==1) echo "onclick='return false'" ?>>Devolver</a></td></tr>
+                <td><a href="../Controlador/index_usuarios.php?action=devolverPrestamo&id=<?php echo $key ?>" <?php if($value[4]==1) echo "onclick='return false'" ?>>Devolver</a></td>
+            <?php
+                if($value[4]==1) {
+            ?>
+                <td>
+                    <form action="../Controlador/index_usuarios.php" method="post">
+                        <input type="hidden" name="idPrest" value="<?php echo $key ?>">
+                        <input type='number' value='' name='puntuarPrest' min=0 max=5 step=0.11><input type='submit' value='puntuarPrestamo' name='action'>
+                    </form>
+                </td>
+
+            <?php
+                
+                };
+            ?>
+            
+            </tr>
 
         <?php
                 }

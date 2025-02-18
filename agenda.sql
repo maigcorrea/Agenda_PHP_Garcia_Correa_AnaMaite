@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-02-2025 a las 23:32:30
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 18-02-2025 a las 12:51:28
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,28 +32,29 @@ CREATE TABLE `amigo` (
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `f_nac` date NOT NULL,
-  `usuario` bigint(20) UNSIGNED NOT NULL
+  `usuario` bigint(20) UNSIGNED NOT NULL,
+  `verificado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `amigo`
 --
 
-INSERT INTO `amigo` (`id`, `nombre`, `apellidos`, `f_nac`, `usuario`) VALUES
-(35, 'Beth', 'Miller', '1990-02-06', 1),
-(36, 'Natalia', 'Gómez', '2013-06-30', 1),
-(37, 'Sergio', 'Sánchez', '2003-09-15', 1),
-(38, 'Carlos', 'Ruiz', '2014-11-12', 1),
-(39, 'Ana', 'Romero', '2015-12-12', 1),
-(40, 'Fernando', 'Molina', '2006-03-20', 1),
-(41, 'Pedro', 'Cortés', '2001-02-02', 3),
-(42, 'Miguel', 'Marín', '2007-06-24', 3),
-(43, 'Noelia', 'Vega', '2005-04-05', 3),
-(44, 'Enrique', 'Muñoz', '1994-10-20', 3),
-(45, 'Irene', 'León', '2010-12-09', 4),
-(46, 'Rafael', 'Castillo', '2006-08-03', 4),
-(47, 'Luis', 'Herrera', '2005-06-02', 4),
-(48, 'Sonia', 'Ríos', '2008-01-28', 4);
+INSERT INTO `amigo` (`id`, `nombre`, `apellidos`, `f_nac`, `usuario`, `verificado`) VALUES
+(35, 'Beth', 'Miller', '1990-02-06', 1, 1),
+(36, 'Natalia', 'Gómez', '2013-06-30', 1, 1),
+(37, 'Sergio', 'Sánchez', '2003-09-15', 1, 1),
+(38, 'Carlos', 'Ruiz', '2014-11-12', 1, 1),
+(39, 'Ana', 'Romero', '2015-12-12', 1, 1),
+(40, 'Fernando', 'Molina', '2006-03-20', 1, 0),
+(41, 'Pedro', 'Cortés', '2001-02-02', 3, 0),
+(42, 'Miguel', 'Marín', '2007-06-24', 3, 0),
+(43, 'Noelia', 'Vega', '2005-04-05', 3, 0),
+(44, 'Enrique', 'Muñoz', '1994-10-20', 3, 0),
+(45, 'Irene', 'León', '2010-12-09', 4, 0),
+(46, 'Rafael', 'Castillo', '2006-08-03', 4, 0),
+(47, 'Luis', 'Herrera', '2005-06-02', 4, 0),
+(48, 'Sonia', 'Ríos', '2008-01-28', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -100,21 +101,22 @@ CREATE TABLE `prestamo` (
   `amigo` bigint(20) UNSIGNED NOT NULL,
   `juego` bigint(20) UNSIGNED NOT NULL,
   `f_prestamo` date NOT NULL,
-  `devuelto` tinyint(1) NOT NULL
+  `devuelto` tinyint(1) NOT NULL,
+  `puntuacion` decimal(3,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `prestamo`
 --
 
-INSERT INTO `prestamo` (`id`, `usuario`, `amigo`, `juego`, `f_prestamo`, `devuelto`) VALUES
-(10, 1, 37, 1, '2025-02-08', 1),
-(11, 1, 39, 18, '2025-02-10', 0),
-(12, 1, 38, 1, '2025-02-11', 0),
-(13, 3, 42, 21, '2025-02-13', 0),
-(14, 3, 44, 22, '2025-02-10', 0),
-(15, 4, 48, 25, '2025-02-12', 0),
-(16, 4, 47, 23, '2025-02-10', 0);
+INSERT INTO `prestamo` (`id`, `usuario`, `amigo`, `juego`, `f_prestamo`, `devuelto`, `puntuacion`) VALUES
+(10, 1, 37, 1, '2025-02-08', 1, 1.40),
+(11, 1, 39, 18, '2025-02-10', 0, 0.00),
+(12, 1, 38, 1, '2025-02-11', 0, 0.00),
+(13, 3, 42, 21, '2025-02-13', 0, 0.00),
+(14, 3, 44, 22, '2025-02-10', 0, 0.00),
+(15, 4, 48, 25, '2025-02-12', 0, 0.00),
+(16, 4, 47, 23, '2025-02-10', 0, 2.50);
 
 -- --------------------------------------------------------
 
@@ -197,7 +199,7 @@ ALTER TABLE `juego`
 -- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

@@ -68,6 +68,14 @@
                         //Mostrar amigos antes de redirigir
                         $tipo="usuario";
                         require_once("../Modelo/class_amigo.php");
+                        require_once("../Modelo/class_prestamo.php");
+
+                        //Hacer la media de puntuaciones
+                        $prestamo=new Prestamo();
+                        $medias=$prestamo->sacarMedia();
+                        
+
+                        //Mostrar datos
                         $amigo=new Amigo();
                         $datosAmigo=$amigo->get_Amigos($_SESSION["id"]);
 
@@ -127,6 +135,12 @@
             require_once("../Modelo/class_amigo.php");
             $amigo=new Amigo();
             $datosAmigo=$amigo->get_Amigos($_SESSION["id"]);
+
+            require_once("../Modelo/class_prestamo.php");
+
+            //Hacer la media de puntuaciones
+            $prestamo=new Prestamo();
+            $medias=$prestamo->sacarMedia();
     
             require_once("../Vista/cabecera.php");
             require_once("../Vista/menu_amigos.php");
@@ -443,6 +457,45 @@
     }
 
 
+    //Función para ordenar amigos por nombre
+    function ordenarNombre($idUsu=null){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        $datosAmigo=$amigo->ordenarNombre($_SESSION["id"]);
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+
+        require_once("../Vista/cabecera.php");
+        require_once("../Vista/menu_amigos.php");
+        require_once("../Vista/pie.html");
+
+    }
+
+
+    function ordenarFecha($idUsu=null){
+        require_once("../Modelo/cookies_sesiones.php");
+        start_session();
+
+        require_once("../Modelo/class_amigo.php");
+        $amigo=new Amigo();
+        $datosAmigo=$amigo->ordenarFecha($_SESSION["id"]);
+
+        //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+        $tipo=$_SESSION['tipo'];
+
+
+        require_once("../Vista/cabecera.php");
+        require_once("../Vista/menu_amigos.php");
+        require_once("../Vista/pie.html");
+
+    }
+
+
     //JUEGOS
     function juegos(){
         require_once("../Modelo/cookies_sesiones.php");
@@ -606,6 +659,32 @@
 
 
     //PRÉSTAMOS
+
+    function puntuarPrestamo(){
+         //Antes de redirigir a la vista hay que mostrar los préstamos
+         require_once("../Modelo/cookies_sesiones.php");
+         start_session();
+ 
+         //Sacar el tipo cada vez que se muestra una vista para saber que menú se tiene que mostrar en ese momento
+         $tipo=$_SESSION['tipo'];
+ 
+         require_once("../Modelo/class_prestamo.php");
+         $prestamo=new Prestamo();
+
+         
+             $puntuado=$prestamo->puntuar($_POST["idPrest"],$_POST["puntuarPrest"]);
+        
+            if($puntuado){
+
+                $datosPrestamo=$prestamo->get_prestamos($_SESSION["id"]);
+                require_once("../Vista/cabecera.php");
+                require_once("../Vista/prestamos.php");
+                require_once("../Vista/pie.html");
+            }else{
+                echo "no";
+            }
+         
+    }
 
     function vistaPrestamos(){
         //Antes de redirigir a la vista hay que mostrar los préstamos

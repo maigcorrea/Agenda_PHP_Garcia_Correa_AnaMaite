@@ -94,5 +94,36 @@
         }
 
 
+        public function puntuar($id, $puntuacion){
+            $sentencia="UPDATE prestamo SET puntuacion =? WHERE id=?;";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_param("si",$puntuacion, $id);
+            $consulta->execute();
+
+            $insertado=false;
+            if($consulta->affected_rows==1){
+                $insertado=true;
+            }
+
+            $consulta->close();
+            return $insertado;
+        }
+
+
+
+        public function sacarMedia(){
+            $sentencia="SELECT amigo, avg(puntuacion) FROM prestamo WHERE devuelto=1 GROUP BY amigo";
+            $consulta=$this->conn->getConection()->prepare($sentencia);
+            $consulta->bind_result($amigo,$media);
+            $consulta->execute();
+
+            $datosMediaS=[];
+            while($consulta->fetch()){
+                $datosMedias[$amigo]=[$media];
+            }
+
+            return $datosMedias;
+        }
+
     }
 ?>
