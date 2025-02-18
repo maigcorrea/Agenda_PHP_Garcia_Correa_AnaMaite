@@ -820,6 +820,12 @@
             iniSesion();
         }
 
+        // "'^(?=(.*[0-9]){2,})(?=.*[A-Z])(?=(.*[\W_]){3,}).{8,20}$'";
+        // if(preg_match($patron, $cadena2)){
+        //     echo "<p>Válida</p>";
+        // }else{
+        //     echo "<p>error</p>";
+        // }
         // ALTER TABLE <nombre_tabla> DROP COLUMN <nombre_columna>
         // DELETE FROM <nombre_tabla> WHERE condición;
         // Borrar todas las filas de la tabla clientes.
